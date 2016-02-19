@@ -33,7 +33,8 @@
 
 
 
-- (nonnull RACCommand *)rac_authenticateWithBrowser;
+- (nonnull RACSignal *)networkReachabilitySignal;
+- (nonnull RACSignal *)authenticateWithBrowserSignal;
 
 
 

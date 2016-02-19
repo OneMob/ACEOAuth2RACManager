@@ -15,12 +15,19 @@
 
 
 @interface ACEOAuth2RACManager ()
+// managers
 @property (nonatomic, strong) AFHTTPSessionManager *networkManager;
 @property (nonatomic, strong) AFOAuth2Manager *oauthManager;
 @property (nonatomic, strong) AFNetworkReachabilityManager *reachabilityManager;
 
+// oauth
 @property (nonatomic, strong) AFOAuthCredential *oauthCredential;
 @property (nonatomic, strong) NSString *oauthRedirectURI;
+
+// signals
+@property (nonatomic, strong) RACSignal *networkReachabilitySignal;
+@property (nonatomic, strong) id<RACSubscriber> pendingSubscriber;
+
 @end
 
 #pragma mark -
@@ -101,24 +108,68 @@
     return _tokenURLString;
 }
 
+- (NSURL *)authenticateURL
+{
+    NSURL *authenticateURL = [self.oauthManager.baseURL URLByAppendingPathComponent:self.authorizeURLString];
+    return [authenticateURL uq_URLByAppendingQueryDictionary:@{
+                                                               @"client_id":        self.oauthManager.clientID,
+                                                               @"redirect_uri":     self.oauthRedirectURI,
+                                                               @"response_type":    @"code"
+                                                               }];
+}
+
+
+#pragma mark - Signals
+
+- (RACSignal *)networkReachabilitySignal
+{
+    if (_networkReachabilitySignal == nil) {
+        _networkReachabilitySignal = RACObserve(self.reachabilityManager, reachable);
+    }
+    return _networkReachabilitySignal;
+}
+
+- (RACSignal *)authenticateWithBrowserSignal
+{
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        
+        // open the page in an external browser
+#if TARGET_OS_IPHONE
+        [[UIApplication sharedApplication] openURL:[self authenticateURL]];
+#else
+        [[NSWorkspace sharedWorkspace] openURL:[self authenticateURL]];
+#endif
+        
+        self.pendingSubscriber = subscriber;
+        
+        return nil;
+    }];
+}
+
+
+
 
 #pragma mark - RAC
 
 - (BOOL)handleRedirectURL:(NSURL *)redirectURL
 {
     NSString *oauthCode = [redirectURL uq_queryDictionary][@"code"];
-    if (oauthCode != nil) {
+    if (oauthCode != nil && self.pendingSubscriber != nil) {
         [[self rac_authenticateWithCode:oauthCode] subscribeNext:^(AFOAuthCredential *credential) {
+            [self.pendingSubscriber sendNext:credential];
+            [self.pendingSubscriber sendCompleted];
             
-            
-        } completed:^{
-            
-            
+        } error:^(NSError *error) {
+            [self.pendingSubscriber sendError:error];
         }];
         
         return YES;
+        
+    } else {
+        [self.pendingSubscriber sendError:nil];
+        
+        return NO;
     }
-    return NO;
 }
 
 //RACCommand* command = [[RACCommand alloc] initWithSignalBlock:^(id _) {
@@ -130,35 +181,29 @@
 //}];
 //self.button.rac_command = command;
 
-- (NSURL *)authenticateURL
-{
-    NSURL *authenticateURL = [self.oauthManager.baseURL URLByAppendingPathComponent:self.authorizeURLString];
-    return [authenticateURL uq_URLByAppendingQueryDictionary:@{
-                                                               @"client_id":        self.oauthManager.clientID,
-                                                               @"redirect_uri":     self.oauthRedirectURI,
-                                                               @"response_type":    @"code"
-                                                               }];
-}
 
-- (RACSignal *)rac_networkReachability
-{
-    return RACObserve(self.reachabilityManager, reachable);
-}
-
-- (RACCommand *)rac_authenticateWithBrowser
-{
-    NSURL *authenticateURL = [self authenticateURL];
-    NSAssert([[UIApplication sharedApplication] canOpenURL:authenticateURL], @"Don't forget to add the redirect scheme in the plist file");
-              
-    return [[RACCommand alloc] initWithEnabled:[self rac_networkReachability]
-                                   signalBlock:^RACSignal *(id input) {
-                                       // open the page in safari
-                                       [[UIApplication sharedApplication] openURL:authenticateURL];
-                                       
-                                       // return immediately
-                                       return [RACSignal empty];
-                                   }];
-}
+//- (RACCommand *)rac_authenticateWithBrowser
+//{
+//    @weakify(self)
+//    return [[RACCommand alloc] initWithEnabled:[self rac_networkReachability]
+//                                   signalBlock:^RACSignal *(id input) {
+//                                       @strongify(self)
+//                                       
+//                                       // open the page in an external browser
+//#if TARGET_OS_IPHONE
+//                                       [[UIApplication sharedApplication] openURL:[self authenticateURL]];
+//#else
+//                                       [[NSWorkspace sharedWorkspace] openURL:[self authenticateURL]];
+//#endif
+//                                       
+//                                       // save a reference of the subscriber
+//                                       return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+//                                           self.pendingSubscriber = subscriber;
+//                                           
+//                                           return nil;
+//                                       }];
+//                                   }];
+//}
 
 
 
@@ -173,7 +218,7 @@
 - (RACSignal *)rac_authenticateWithCode:(NSString *)oauthCode
 {
     @weakify(self)
-    return [RACSignal createSignal:^(id<RACSubscriber> subscriber) {
+    return [[RACSignal createSignal:^(id<RACSubscriber> subscriber) {
         @strongify(self)
         AFHTTPRequestOperation *operation =
         [self.oauthManager authenticateUsingOAuthWithURLString:self.tokenURLString
@@ -190,7 +235,8 @@
         return [RACDisposable disposableWithBlock:^{
             [operation cancel];
         }];
-    }];
+        
+    }] setNameWithFormat:@"[%@] -rac_authenticateWithCode: %@", self.class, oauthCode];
 }
 
 - (RACSignal *)rac_auth
