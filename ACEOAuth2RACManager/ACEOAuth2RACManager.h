@@ -12,13 +12,26 @@
 
 @property (nonatomic, assign, getter=isLogging) BOOL logging;
 
-@property (nonatomic, strong, nonnull) NSURL *authorizationURL;
-@property (nonatomic, strong, nonnull) NSURL *tokenURL;
+@property (nonatomic, strong, nonnull) NSString *authorizeURLString;
+@property (nonatomic, strong, nonnull) NSString *tokenURLString;
 
-- (nonnull instancetype)initWithBaseURL:(nullable NSURL *)url
-                              oauthPath:(nullable NSString *)oauthPath
-                                apiPath:(nullable NSString *)apiPath NS_DESIGNATED_INITIALIZER;
+
+- (nonnull instancetype)initWithBaseURL:(nonnull NSURL *)baseURL
+                               clientID:(nonnull NSString *)clientID
+                                 secret:(nonnull NSString *)secret
+                            redirectURL:(nullable NSURL *)redirectURL;
+
+- (nonnull instancetype)initWithBaseURL:(nonnull NSURL *)baseURL
+                               clientID:(nonnull NSString *)clientID
+                                 secret:(nonnull NSString *)secret
+                            redirectURL:(nullable NSURL *)redirectURL
+                         oauthURLString:(nullable NSString *)oauthURLString
+                           apiURLString:(nullable NSString *)apiURLString NS_DESIGNATED_INITIALIZER;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
+
+
+
+- (BOOL)handleRedirectURL:(nonnull NSURL *)redirectURL;
 
 @end
