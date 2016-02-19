@@ -12,12 +12,13 @@
 #import "AFNetworkActivityLogger.h"
 #import "AFOAuth2Manager.h"
 #import "NSURL+QueryDictionary.h"
-#import <ReactiveCocoa/ReactiveCocoa.h>
 
 
 @interface ACEOAuth2RACManager ()
 @property (nonatomic, strong) AFHTTPSessionManager *networkManager;
 @property (nonatomic, strong) AFOAuth2Manager *oauthManager;
+@property (nonatomic, strong) AFNetworkReachabilityManager *reachabilityManager;
+
 @property (nonatomic, strong) AFOAuthCredential *oauthCredential;
 @property (nonatomic, strong) NSString *oauthRedirectURI;
 @end
@@ -43,14 +44,16 @@
 {
     self = [super init];
     if (self) {
-        
         NSURL *oauthBaseURL     = oauthURLString ? [baseURL URLByAppendingPathComponent:oauthURLString] : baseURL;
         NSURL *apiBaseURL       = apiURLString ? [baseURL URLByAppendingPathComponent:apiURLString] : baseURL;
         
         self.networkManager     = [[AFHTTPSessionManager alloc] initWithBaseURL:apiBaseURL];
         self.oauthManager       = [[AFOAuth2Manager alloc] initWithBaseURL:oauthBaseURL clientID:clientID secret:secret];
-        self.oauthRedirectURI   = [redirectURL absoluteString];
         
+        self.reachabilityManager= [AFNetworkReachabilityManager managerForDomain:baseURL.host];
+        [self.reachabilityManager startMonitoring];
+        
+        self.oauthRedirectURI   = [redirectURL absoluteString];
     }
     return self;
 }
@@ -118,9 +121,60 @@
     return NO;
 }
 
+//RACCommand* command = [[RACCommand alloc] initWithSignalBlock:^(id _) {
+//    return [[[self.login loginSignalWithUsername:self.username password:self.password]
+//             doCompleted:^{
+//                 // move to next screen
+//             }]
+//            timeout:2.0 onScheduler:[RACScheduler mainThreadScheduler]];
+//}];
+//self.button.rac_command = command;
+
+- (NSURL *)authenticateURL
+{
+    NSURL *authenticateURL = [self.oauthManager.baseURL URLByAppendingPathComponent:self.authorizeURLString];
+    return [authenticateURL uq_URLByAppendingQueryDictionary:@{
+                                                               @"client_id":        self.oauthManager.clientID,
+                                                               @"redirect_uri":     self.oauthRedirectURI,
+                                                               @"response_type":    @"code"
+                                                               }];
+}
+
+- (RACSignal *)rac_networkReachability
+{
+    return RACObserve(self.reachabilityManager, reachable);
+}
+
+- (RACCommand *)rac_authenticateWithBrowser
+{
+    NSURL *authenticateURL = [self authenticateURL];
+    NSAssert([[UIApplication sharedApplication] canOpenURL:authenticateURL], @"Don't forget to add the redirect scheme in the plist file");
+              
+    return [[RACCommand alloc] initWithEnabled:[self rac_networkReachability]
+                                   signalBlock:^RACSignal *(id input) {
+                                       // open the page in safari
+                                       [[UIApplication sharedApplication] openURL:authenticateURL];
+                                       
+                                       // return immediately
+                                       return [RACSignal empty];
+                                   }];
+}
+
+
+
+//return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+//    
+//    
+//    return [RACDisposable disposableWithBlock:^{
+//    }];
+//    
+//}] setNameWithFormat:@"[%@] -bind:", self.class];
+
 - (RACSignal *)rac_authenticateWithCode:(NSString *)oauthCode
 {
+    @weakify(self)
     return [RACSignal createSignal:^(id<RACSubscriber> subscriber) {
+        @strongify(self)
         AFHTTPRequestOperation *operation =
         [self.oauthManager authenticateUsingOAuthWithURLString:self.tokenURLString
                                                           code:oauthCode

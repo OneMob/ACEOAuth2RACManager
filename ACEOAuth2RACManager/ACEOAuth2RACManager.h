@@ -6,7 +6,7 @@
 //  Copyright © 2016 Stefano Acerbetti. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface ACEOAuth2RACManager : NSObject
 
@@ -29,6 +29,11 @@
                            apiURLString:(nullable NSString *)apiURLString NS_DESIGNATED_INITIALIZER;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
+
+
+
+
+- (nonnull RACCommand *)rac_authenticateWithBrowser;
 
 
 
