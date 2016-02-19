@@ -1,0 +1,5 @@
+target 'ACEOAuth2RACManagerDemo' do
+	pod 'AFOAuth2Manager', '~> 2.2'
+	pod 'AFNetworkActivityLogger', '~> 2.0'
+	pod 'AFNetworking-RACRetryExtensions', '~> 0.2'
+end

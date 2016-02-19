@@ -1,0 +1,509 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		50BB0D381C76CE9F00E7880F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB0D371C76CE9F00E7880F /* main.m */; };
+		50BB0D3B1C76CE9F00E7880F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB0D3A1C76CE9F00E7880F /* AppDelegate.m */; };
+		50BB0D3E1C76CE9F00E7880F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB0D3D1C76CE9F00E7880F /* ViewController.m */; };
+		50BB0D411C76CE9F00E7880F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50BB0D3F1C76CE9F00E7880F /* Main.storyboard */; };
+		50BB0D431C76CE9F00E7880F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50BB0D421C76CE9F00E7880F /* Assets.xcassets */; };
+		50BB0D461C76CE9F00E7880F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50BB0D441C76CE9F00E7880F /* LaunchScreen.storyboard */; };
+		50BB0D511C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB0D501C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.m */; };
+		50BB0D5E1C76D42100E7880F /* ACEOAuth2RACManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB0D5D1C76D42100E7880F /* ACEOAuth2RACManager.m */; };
+		597A4935D8EF25176A06A379 /* libPods-ACEOAuth2RACManagerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A07FF35870F9EECFF112E02 /* libPods-ACEOAuth2RACManagerDemo.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		50BB0D4D1C76CE9F00E7880F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 50BB0D2B1C76CE9F00E7880F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50BB0D321C76CE9F00E7880F;
+			remoteInfo = ACEOAuth2RACManagerDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		095583E29FB13437D01941AD /* Pods-ACEOAuth2RACManagerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEOAuth2RACManagerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACEOAuth2RACManagerDemo/Pods-ACEOAuth2RACManagerDemo.release.xcconfig"; sourceTree = "<group>"; };
+		50BB0D331C76CE9F00E7880F /* ACEOAuth2RACManagerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACEOAuth2RACManagerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		50BB0D371C76CE9F00E7880F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		50BB0D391C76CE9F00E7880F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		50BB0D3A1C76CE9F00E7880F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		50BB0D3C1C76CE9F00E7880F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		50BB0D3D1C76CE9F00E7880F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		50BB0D401C76CE9F00E7880F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		50BB0D421C76CE9F00E7880F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		50BB0D451C76CE9F00E7880F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		50BB0D471C76CE9F00E7880F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50BB0D4C1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACEOAuth2RACManagerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		50BB0D501C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEOAuth2RACManagerDemoTests.m; sourceTree = "<group>"; };
+		50BB0D521C76CE9F00E7880F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		50BB0D5C1C76D42100E7880F /* ACEOAuth2RACManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEOAuth2RACManager.h; sourceTree = "<group>"; };
+		50BB0D5D1C76D42100E7880F /* ACEOAuth2RACManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEOAuth2RACManager.m; sourceTree = "<group>"; };
+		8A07FF35870F9EECFF112E02 /* libPods-ACEOAuth2RACManagerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ACEOAuth2RACManagerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6B8160668DE29852F9273EF /* Pods-ACEOAuth2RACManagerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEOAuth2RACManagerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACEOAuth2RACManagerDemo/Pods-ACEOAuth2RACManagerDemo.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		50BB0D301C76CE9F00E7880F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				597A4935D8EF25176A06A379 /* libPods-ACEOAuth2RACManagerDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50BB0D491C76CE9F00E7880F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		49588A55B6D7E0978C0192C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8A07FF35870F9EECFF112E02 /* libPods-ACEOAuth2RACManagerDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		50BB0D2A1C76CE9F00E7880F = {
+			isa = PBXGroup;
+			children = (
+				50BB0D5B1C76D3CF00E7880F /* ACEOAuth2RACManager */,
+				50BB0D351C76CE9F00E7880F /* ACEOAuth2RACManagerDemo */,
+				50BB0D4F1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests */,
+				50BB0D341C76CE9F00E7880F /* Products */,
+				D33DEE3CD2F9C2BEAC0FEA1F /* Pods */,
+				49588A55B6D7E0978C0192C7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		50BB0D341C76CE9F00E7880F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				50BB0D331C76CE9F00E7880F /* ACEOAuth2RACManagerDemo.app */,
+				50BB0D4C1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		50BB0D351C76CE9F00E7880F /* ACEOAuth2RACManagerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				50BB0D391C76CE9F00E7880F /* AppDelegate.h */,
+				50BB0D3A1C76CE9F00E7880F /* AppDelegate.m */,
+				50BB0D3C1C76CE9F00E7880F /* ViewController.h */,
+				50BB0D3D1C76CE9F00E7880F /* ViewController.m */,
+				50BB0D3F1C76CE9F00E7880F /* Main.storyboard */,
+				50BB0D421C76CE9F00E7880F /* Assets.xcassets */,
+				50BB0D441C76CE9F00E7880F /* LaunchScreen.storyboard */,
+				50BB0D471C76CE9F00E7880F /* Info.plist */,
+				50BB0D361C76CE9F00E7880F /* Supporting Files */,
+			);
+			path = ACEOAuth2RACManagerDemo;
+			sourceTree = "<group>";
+		};
+		50BB0D361C76CE9F00E7880F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				50BB0D371C76CE9F00E7880F /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		50BB0D4F1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				50BB0D501C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.m */,
+				50BB0D521C76CE9F00E7880F /* Info.plist */,
+			);
+			path = ACEOAuth2RACManagerDemoTests;
+			sourceTree = "<group>";
+		};
+		50BB0D5B1C76D3CF00E7880F /* ACEOAuth2RACManager */ = {
+			isa = PBXGroup;
+			children = (
+				50BB0D5C1C76D42100E7880F /* ACEOAuth2RACManager.h */,
+				50BB0D5D1C76D42100E7880F /* ACEOAuth2RACManager.m */,
+			);
+			name = ACEOAuth2RACManager;
+			path = ../ACEOAuth2RACManager;
+			sourceTree = "<group>";
+		};
+		D33DEE3CD2F9C2BEAC0FEA1F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D6B8160668DE29852F9273EF /* Pods-ACEOAuth2RACManagerDemo.debug.xcconfig */,
+				095583E29FB13437D01941AD /* Pods-ACEOAuth2RACManagerDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		50BB0D321C76CE9F00E7880F /* ACEOAuth2RACManagerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50BB0D551C76CE9F00E7880F /* Build configuration list for PBXNativeTarget "ACEOAuth2RACManagerDemo" */;
+			buildPhases = (
+				0EEDE37068A53147AAF88F94 /* Check Pods Manifest.lock */,
+				50BB0D2F1C76CE9F00E7880F /* Sources */,
+				50BB0D301C76CE9F00E7880F /* Frameworks */,
+				50BB0D311C76CE9F00E7880F /* Resources */,
+				23F0D2BB417BDC60F9259DC6 /* Embed Pods Frameworks */,
+				93473C4BAC4FC3D59E2554BF /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ACEOAuth2RACManagerDemo;
+			productName = ACEOAuth2RACManagerDemo;
+			productReference = 50BB0D331C76CE9F00E7880F /* ACEOAuth2RACManagerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		50BB0D4B1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50BB0D581C76CE9F00E7880F /* Build configuration list for PBXNativeTarget "ACEOAuth2RACManagerDemoTests" */;
+			buildPhases = (
+				50BB0D481C76CE9F00E7880F /* Sources */,
+				50BB0D491C76CE9F00E7880F /* Frameworks */,
+				50BB0D4A1C76CE9F00E7880F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				50BB0D4E1C76CE9F00E7880F /* PBXTargetDependency */,
+			);
+			name = ACEOAuth2RACManagerDemoTests;
+			productName = ACEOAuth2RACManagerDemoTests;
+			productReference = 50BB0D4C1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		50BB0D2B1C76CE9F00E7880F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Stefano Acerbetti";
+				TargetAttributes = {
+					50BB0D321C76CE9F00E7880F = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					50BB0D4B1C76CE9F00E7880F = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 50BB0D321C76CE9F00E7880F;
+					};
+				};
+			};
+			buildConfigurationList = 50BB0D2E1C76CE9F00E7880F /* Build configuration list for PBXProject "ACEOAuth2RACManagerDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 50BB0D2A1C76CE9F00E7880F;
+			productRefGroup = 50BB0D341C76CE9F00E7880F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				50BB0D321C76CE9F00E7880F /* ACEOAuth2RACManagerDemo */,
+				50BB0D4B1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		50BB0D311C76CE9F00E7880F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50BB0D461C76CE9F00E7880F /* LaunchScreen.storyboard in Resources */,
+				50BB0D431C76CE9F00E7880F /* Assets.xcassets in Resources */,
+				50BB0D411C76CE9F00E7880F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50BB0D4A1C76CE9F00E7880F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0EEDE37068A53147AAF88F94 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		23F0D2BB417BDC60F9259DC6 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACEOAuth2RACManagerDemo/Pods-ACEOAuth2RACManagerDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		93473C4BAC4FC3D59E2554BF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACEOAuth2RACManagerDemo/Pods-ACEOAuth2RACManagerDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		50BB0D2F1C76CE9F00E7880F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50BB0D3E1C76CE9F00E7880F /* ViewController.m in Sources */,
+				50BB0D5E1C76D42100E7880F /* ACEOAuth2RACManager.m in Sources */,
+				50BB0D3B1C76CE9F00E7880F /* AppDelegate.m in Sources */,
+				50BB0D381C76CE9F00E7880F /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50BB0D481C76CE9F00E7880F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50BB0D511C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		50BB0D4E1C76CE9F00E7880F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50BB0D321C76CE9F00E7880F /* ACEOAuth2RACManagerDemo */;
+			targetProxy = 50BB0D4D1C76CE9F00E7880F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		50BB0D3F1C76CE9F00E7880F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50BB0D401C76CE9F00E7880F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		50BB0D441C76CE9F00E7880F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				50BB0D451C76CE9F00E7880F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		50BB0D531C76CE9F00E7880F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		50BB0D541C76CE9F00E7880F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		50BB0D561C76CE9F00E7880F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6B8160668DE29852F9273EF /* Pods-ACEOAuth2RACManagerDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ACEOAuth2RACManagerDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.acerbetti.ACEOAuth2RACManagerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		50BB0D571C76CE9F00E7880F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 095583E29FB13437D01941AD /* Pods-ACEOAuth2RACManagerDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ACEOAuth2RACManagerDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.acerbetti.ACEOAuth2RACManagerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		50BB0D591C76CE9F00E7880F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ACEOAuth2RACManagerDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.acerbetti.ACEOAuth2RACManagerDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ACEOAuth2RACManagerDemo.app/ACEOAuth2RACManagerDemo";
+			};
+			name = Debug;
+		};
+		50BB0D5A1C76CE9F00E7880F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ACEOAuth2RACManagerDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.acerbetti.ACEOAuth2RACManagerDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ACEOAuth2RACManagerDemo.app/ACEOAuth2RACManagerDemo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		50BB0D2E1C76CE9F00E7880F /* Build configuration list for PBXProject "ACEOAuth2RACManagerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50BB0D531C76CE9F00E7880F /* Debug */,
+				50BB0D541C76CE9F00E7880F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50BB0D551C76CE9F00E7880F /* Build configuration list for PBXNativeTarget "ACEOAuth2RACManagerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50BB0D561C76CE9F00E7880F /* Debug */,
+				50BB0D571C76CE9F00E7880F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50BB0D581C76CE9F00E7880F /* Build configuration list for PBXNativeTarget "ACEOAuth2RACManagerDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50BB0D591C76CE9F00E7880F /* Debug */,
+				50BB0D5A1C76CE9F00E7880F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 50BB0D2B1C76CE9F00E7880F /* Project object */;
+}
