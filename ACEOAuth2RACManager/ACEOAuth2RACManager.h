@@ -26,7 +26,7 @@
                                  secret:(nonnull NSString *)secret
                             redirectURL:(nullable NSURL *)redirectURL
                          oauthURLString:(nullable NSString *)oauthURLString
-                           apiURLString:(nullable NSString *)apiURLString NS_DESIGNATED_INITIALIZER;
+                           apiURLString:(nullable NSString *)apiURLString;
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 

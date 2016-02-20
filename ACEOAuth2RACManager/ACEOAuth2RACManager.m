@@ -131,7 +131,9 @@
 
 - (RACSignal *)authenticateWithBrowserSignal
 {
+    @weakify(self)
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        @strongify(self)
         
         // open the page in an external browser
 #if TARGET_OS_IPHONE
@@ -145,8 +147,6 @@
         return nil;
     }];
 }
-
-
 
 
 #pragma mark - RAC

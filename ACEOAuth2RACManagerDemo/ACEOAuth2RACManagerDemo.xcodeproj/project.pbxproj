@@ -430,6 +430,7 @@
 			baseConfigurationReference = D6B8160668DE29852F9273EF /* Pods-ACEOAuth2RACManagerDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				INFOPLIST_FILE = ACEOAuth2RACManagerDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acerbetti.ACEOAuth2RACManagerDemo;
@@ -442,6 +443,7 @@
 			baseConfigurationReference = 095583E29FB13437D01941AD /* Pods-ACEOAuth2RACManagerDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				INFOPLIST_FILE = ACEOAuth2RACManagerDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.acerbetti.ACEOAuth2RACManagerDemo;
