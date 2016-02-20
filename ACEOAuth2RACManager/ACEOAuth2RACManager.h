@@ -8,6 +8,9 @@
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
+extern NSTimeInterval const ACEDefaultTimeInterval;
+
+
 @interface ACEOAuth2RACManager : NSObject
 
 @property (nonatomic, assign, getter=isLogging) BOOL logging;
@@ -35,6 +38,21 @@
 
 - (nonnull RACSignal *)networkReachabilitySignal;
 - (nonnull RACSignal *)authenticateWithBrowserSignal;
+
+
+// HTTP methods
+- (nonnull RACSignal *)rac_GET:(nonnull NSString *)path parameters:(nullable id)parameters;
+- (nonnull RACSignal *)rac_GET:(nonnull NSString *)path parameters:(nullable id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval;
+
+- (nonnull RACSignal *)rac_POST:(nonnull NSString *)path parameters:(nullable id)parameters;
+- (nonnull RACSignal *)rac_POST:(nonnull NSString *)path parameters:(nullable id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval;
+
+//- (nonnull RACSignal *)rac_HEAD:(nonnull NSString *)path parameters:(nullable id)parameters;
+//- (nonnull RACSignal *)rac_HEAD:(nonnull NSString *)path parameters:(nullable id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval;
+
+//- (nonnull RACSignal *)rac_PUT:(nonnull NSString *)path parameters:(nullable id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval;
+//- (nonnull RACSignal *)rac_PATCH:(nonnull NSString *)path parameters:(nullable id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval;
+//- (nonnull RACSignal *)rac_DELETE:(nonnull NSString *)path parameters:(nullable id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval;
 
 
 

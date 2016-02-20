@@ -13,6 +13,8 @@
 #import "AFOAuth2Manager.h"
 #import "NSURL+QueryDictionary.h"
 
+NSTimeInterval const ACEDefaultTimeInterval = 5.0;
+
 
 @interface ACEOAuth2RACManager ()
 // managers
@@ -155,11 +157,21 @@
 {
     NSString *oauthCode = [redirectURL uq_queryDictionary][@"code"];
     if (oauthCode != nil && self.pendingSubscriber != nil) {
+        
+        @weakify(self)
         [[self rac_authenticateWithCode:oauthCode] subscribeNext:^(AFOAuthCredential *credential) {
+            @strongify(self)
+            
+            // update the request serializer
+            [self.networkManager.requestSerializer setAuthorizationHeaderFieldWithCredential:credential];
+            
+            // pass the credentials in the chain
             [self.pendingSubscriber sendNext:credential];
             [self.pendingSubscriber sendCompleted];
             
         } error:^(NSError *error) {
+            @strongify(self)
+            
             [self.pendingSubscriber sendError:error];
         }];
         
@@ -273,7 +285,29 @@
         }];
     }];
 }
-    
+
+
+- (RACSignal *)rac_GET:(NSString *)path parameters:(id)parameters
+{
+    return [self.networkManager rac_GET:path parameters:parameters retries:1];
+}
+
+- (RACSignal *)rac_GET:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
+{
+    return [[self.networkManager rac_GET:path parameters:parameters retries:retries interval:interval] map:^id(RACTuple *response) {
+        return [response first];
+    }];
+}
+
+- (RACSignal *)rac_POST:(NSString *)path parameters:(id)parameters
+{
+    return [self.networkManager rac_POST:path parameters:parameters retries:1];
+}
+
+- (RACSignal *)rac_POST:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
+{
+    return [self.networkManager rac_POST:path parameters:parameters retries:retries interval:interval];
+}
     
         
 //        NSURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:path relativeToURL:self.baseURL] absoluteString] parameters:parameters];
