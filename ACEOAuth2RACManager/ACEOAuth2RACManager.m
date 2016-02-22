@@ -36,6 +36,10 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
 
 @implementation ACEOAuth2RACManager
 
+@synthesize oauthCredential = _oauthCredential;
+
+#pragma mark -
+
 - (instancetype)initWithBaseURL:(NSURL *)baseURL
                        clientID:(NSString *)clientID
                          secret:(NSString *)secret
@@ -56,8 +60,9 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
         NSURL *oauthBaseURL     = oauthURLString ? [baseURL URLByAppendingPathComponent:oauthURLString] : baseURL;
         NSURL *apiBaseURL       = apiURLString ? [baseURL URLByAppendingPathComponent:apiURLString] : baseURL;
         
-        self.networkManager     = [[AFHTTPSessionManager alloc] initWithBaseURL:apiBaseURL];
         self.oauthManager       = [[AFOAuth2Manager alloc] initWithBaseURL:oauthBaseURL clientID:clientID secret:secret];
+        self.networkManager     = [[AFHTTPSessionManager alloc] initWithBaseURL:apiBaseURL];
+        [self.networkManager.requestSerializer setAuthorizationHeaderFieldWithCredential:self.oauthCredential];
         
         self.reachabilityManager= [AFNetworkReachabilityManager managerForDomain:baseURL.host];
         [self.reachabilityManager startMonitoring];
@@ -89,9 +94,38 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
 - (AFOAuthCredential *)oauthCredential
 {
     if (_oauthCredential == nil) {
-        _oauthCredential = [AFOAuthCredential retrieveCredentialWithIdentifier:self.oauthManager.serviceProviderIdentifier];
+        if ([self.delegate respondsToSelector:@selector(retrieveCodedCredentialForNetworkManager:)]) {
+            // custom implementation
+            NSData *data = [self.delegate retrieveCodedCredentialForNetworkManager:self];
+            _oauthCredential = [NSUnarchiver unarchiveObjectWithData:data];
+            
+        } else {
+            // default implementation
+            _oauthCredential = [AFOAuthCredential retrieveCredentialWithIdentifier:self.oauthManager.serviceProviderIdentifier];
+        }
     }
     return _oauthCredential;
+}
+
+- (void)setOauthCredential:(AFOAuthCredential *)oauthCredential
+{
+    if (_oauthCredential != oauthCredential) {
+        _oauthCredential = oauthCredential;
+        
+        // update the request serializer
+        [self.networkManager.requestSerializer setAuthorizationHeaderFieldWithCredential:oauthCredential];
+        
+        // save it
+        if ([self.delegate respondsToSelector:@selector(networkManager:storeCodedCredentials:)]) {
+            // custom implementation
+            NSData *data = [NSArchiver archivedDataWithRootObject:oauthCredential];
+            [self.delegate networkManager:self storeCodedCredentials:data];
+            
+        } else {
+            // default implementation
+            [AFOAuthCredential storeCredential:oauthCredential withIdentifier:self.oauthManager.serviceProviderIdentifier];
+        }
+    }
 }
 
 - (NSString *)authorizeURLString
@@ -150,6 +184,18 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
     }];
 }
 
+- (RACSignal *)authenticate
+{
+    if (self.oauthCredential == nil) {
+        return [self authenticateWithBrowserSignal];
+        
+    } else if (self.oauthCredential.isExpired) {
+        return nil;
+        
+    } else {
+        return [RACSignal return:self.oauthCredential];
+    }
+}
 
 #pragma mark - RAC
 
@@ -162,8 +208,7 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
         [[self rac_authenticateWithCode:oauthCode] subscribeNext:^(AFOAuthCredential *credential) {
             @strongify(self)
             
-            // update the request serializer
-            [self.networkManager.requestSerializer setAuthorizationHeaderFieldWithCredential:credential];
+            self.oauthCredential = credential;
             
             // pass the credentials in the chain
             [self.pendingSubscriber sendNext:credential];
@@ -289,7 +334,7 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
 
 - (RACSignal *)rac_GET:(NSString *)path parameters:(id)parameters
 {
-    return [self.networkManager rac_GET:path parameters:parameters retries:1];
+    return [self rac_GET:path parameters:parameters retries:1 interval:ACEDefaultTimeInterval];
 }
 
 - (RACSignal *)rac_GET:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval

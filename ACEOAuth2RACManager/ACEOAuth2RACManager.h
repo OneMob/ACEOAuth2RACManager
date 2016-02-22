@@ -10,8 +10,20 @@
 
 extern NSTimeInterval const ACEDefaultTimeInterval;
 
+@class ACEOAuth2RACManager;
+
+@protocol ACEOAuth2RACManagerDelegate <NSObject>
+
+@optional
+- (nonnull NSData *)retrieveCodedCredentialForNetworkManager:(nonnull ACEOAuth2RACManager *)manager;
+- (void)networkManager:(nonnull ACEOAuth2RACManager *)manager storeCodedCredentials:(nonnull NSData *)credentials;
+
+@end
+
 
 @interface ACEOAuth2RACManager : NSObject
+
+@property (nonatomic, weak) id<ACEOAuth2RACManagerDelegate> delegate;
 
 @property (nonatomic, assign, getter=isLogging) BOOL logging;
 
@@ -37,7 +49,7 @@ extern NSTimeInterval const ACEDefaultTimeInterval;
 
 
 - (nonnull RACSignal *)networkReachabilitySignal;
-- (nonnull RACSignal *)authenticateWithBrowserSignal;
+- (nonnull RACSignal *)authenticate;
 
 
 // HTTP methods
