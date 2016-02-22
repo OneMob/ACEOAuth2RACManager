@@ -139,10 +139,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#pragma mark - HTTP methods
+#pragma mark - HTTP Signals
 
 ///-------------------
-/// @name HTTP methods
+/// @name HTTP Signals
 ///-------------------
 
 /**
@@ -290,16 +290,33 @@ NS_ASSUME_NONNULL_END
 - (nonnull RACSignal *)rac_DELETE:(nonnull NSString *)path parameters:(nullable id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval;
 
 
+#pragma mark - Other Signals
 
+///--------------------
+/// @name Other Signals
+///--------------------
 
-
-
-
-
-
-
+/**
+ Return a signal observing the reachability of the specified host.
+ 
+ @return The signal that monitor the network reachability.
+ */
 - (nonnull RACSignal *)rac_networkReachabilitySignal;
 
+
+#pragma mark - HTTP methods
+
+///---------------------
+/// @name Authentication
+///---------------------
+
+/**
+ Call this method to complete the authentication flow from the Application Delegate.
+ 
+ @param redirectURL The URL which contains the authentication code.
+ 
+ @return YES if the authentication code is set, NO otherwise.
+ */
 - (BOOL)handleRedirectURL:(nonnull NSURL *)redirectURL;
 
 @end

@@ -88,7 +88,24 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
 }
 
 
-#pragma mark - URL paths
+#pragma mark - Logger
+
+- (void)setLogging:(BOOL)logging
+{
+    if (_logging != logging) {
+        _logging = logging;
+        
+        if (logging) {
+            [[AFNetworkActivityLogger sharedLogger] startLogging];
+            
+        } else {
+            [[AFNetworkActivityLogger sharedLogger] stopLogging];
+        }
+    }
+}
+
+
+#pragma mark - URL Paths
 
 - (NSString *)authorizeURLString
 {
@@ -286,7 +303,7 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
 }
 
 
-#pragma mark - HTTP Methods
+#pragma mark - HTTP Signals
 
 - (RACSignal *)rac_GET:(NSString *)path parameters:(id)parameters
 {
@@ -373,7 +390,7 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
 }
 
 
-#pragma mark - Signals
+#pragma mark - Other Signals
 
 - (RACSignal *)rac_networkReachabilitySignal
 {
@@ -381,23 +398,6 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
         _networkReachabilitySignal = RACObserve(self.reachabilityManager, reachable);
     }
     return _networkReachabilitySignal;
-}
-
-
-#pragma mark - Logger
-
-- (void)setLogging:(BOOL)logging
-{
-    if (_logging != logging) {
-        _logging = logging;
-        
-        if (logging) {
-            [[AFNetworkActivityLogger sharedLogger] startLogging];
-            
-        } else {
-            [[AFNetworkActivityLogger sharedLogger] stopLogging];
-        }
-    }
 }
 
 @end
