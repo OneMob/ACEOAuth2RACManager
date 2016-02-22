@@ -88,24 +88,26 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
 }
 
 
-#pragma mark - Logger
+#pragma mark - URL paths
 
-- (void)setLogging:(BOOL)logging
+- (NSString *)authorizeURLString
 {
-    if (_logging != logging) {
-        _logging = logging;
-        
-        if (logging) {
-            [[AFNetworkActivityLogger sharedLogger] startLogging];
-            
-        } else {
-            [[AFNetworkActivityLogger sharedLogger] stopLogging];
-        }
+    if (_authorizeURLString == nil) {
+        _authorizeURLString = @"authorize";
     }
+    return _authorizeURLString;
+}
+
+- (NSString *)tokenURLString
+{
+    if (_tokenURLString == nil) {
+        _tokenURLString = @"token";
+    }
+    return _tokenURLString;
 }
 
 
-#pragma mark - Properties
+#pragma mark - Credentials
 
 - (AFOAuthCredential *)oauthCredential
 {
@@ -113,7 +115,7 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
         if ([self.delegate respondsToSelector:@selector(retrieveCodedCredentialForNetworkManager:withIdentifier:)]) {
             // custom implementation
             NSData *data = [self.delegate retrieveCodedCredentialForNetworkManager:self
-                            withIdentifier:self.oauthManager.serviceProviderIdentifier];
+                                                                    withIdentifier:self.oauthManager.serviceProviderIdentifier];
             
             _oauthCredential = [NSUnarchiver unarchiveObjectWithData:data];
             
@@ -150,21 +152,8 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
     }
 }
 
-- (NSString *)authorizeURLString
-{
-    if (_authorizeURLString == nil) {
-        _authorizeURLString = @"authorize";
-    }
-    return _authorizeURLString;
-}
 
-- (NSString *)tokenURLString
-{
-    if (_tokenURLString == nil) {
-        _tokenURLString = @"token";
-    }
-    return _tokenURLString;
-}
+#pragma mark - Authentication
 
 - (NSURL *)authenticateURL
 {
@@ -176,18 +165,20 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
                                                                }];
 }
 
-
-#pragma mark - Signals
-
-- (RACSignal *)networkReachabilitySignal
+- (RACSignal *)rac_authenticate
 {
-    if (_networkReachabilitySignal == nil) {
-        _networkReachabilitySignal = RACObserve(self.reachabilityManager, reachable);
+    if (self.oauthCredential == nil) {
+        return [self rac_authenticateWithBrowserSignal];
+        
+    } else if (self.oauthCredential.isExpired) {
+        return [self rac_authenticateWithRefreshToken:self.oauthCredential.refreshToken];
+        
+    } else {
+        return [RACSignal return:self.oauthCredential];
     }
-    return _networkReachabilitySignal;
 }
 
-- (RACSignal *)authenticateWithBrowserSignal
+- (RACSignal *)rac_authenticateWithBrowserSignal
 {
     @weakify(self)
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
@@ -206,20 +197,64 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
     }];
 }
 
-- (RACSignal *)authenticate
+- (RACSignal *)rac_authenticateWithCode:(NSString *)oauthCode
 {
-    if (self.oauthCredential == nil) {
-        return [self authenticateWithBrowserSignal];
+    @weakify(self)
+    return [[RACSignal createSignal:^(id<RACSubscriber> subscriber) {
         
-    } else if (self.oauthCredential.isExpired) {
-        return nil;
+        @strongify(self)
+        AFHTTPRequestOperation *operation =
+        [self.oauthManager authenticateUsingOAuthWithURLString:self.tokenURLString
+                                                          code:oauthCode
+                                                   redirectURI:self.oauthRedirectURI
+                                                       success:^(AFOAuthCredential *credential) {
+                                                           
+                                                           // store the new credentials
+                                                           self.oauthCredential = credential;
+                                                           
+                                                           // pass the credentials in the chain
+                                                           [subscriber sendNext:credential];
+                                                           [subscriber sendCompleted];
+                                                           
+                                                       } failure:^(NSError *error) {
+                                                           [subscriber sendError:error];
+                                                       }];
         
-    } else {
-        return [RACSignal return:self.oauthCredential];
-    }
+        return [RACDisposable disposableWithBlock:^{
+            [operation cancel];
+        }];
+        
+    }] setNameWithFormat:@"[%@] -rac_authenticateWithCode: %@", self.class, oauthCode];
 }
 
-#pragma mark - RAC
+- (RACSignal *)rac_authenticateWithRefreshToken:(NSString *)refreshToken
+{
+    @weakify(self)
+    return [[RACSignal createSignal:^(id<RACSubscriber> subscriber) {
+        
+        @strongify(self)
+        AFHTTPRequestOperation *operation =
+        [self.oauthManager authenticateUsingOAuthWithURLString:self.tokenURLString
+                                                  refreshToken:refreshToken
+                                                       success:^(AFOAuthCredential *credential) {
+                                                           
+                                                           // store the new credentials
+                                                           self.oauthCredential = credential;
+                                                           
+                                                           // pass the credentials in the chain
+                                                           [subscriber sendNext:credential];
+                                                           [subscriber sendCompleted];
+                                                           
+                                                       } failure:^(NSError *error) {
+                                                           [subscriber sendError:error];
+                                                       }];
+        
+        return [RACDisposable disposableWithBlock:^{
+            [operation cancel];
+        }];
+        
+    }] setNameWithFormat:@"[%@] -rac_authenticateWithRefreshToken: %@", self.class, refreshToken];
+}
 
 - (BOOL)handleRedirectURL:(NSURL *)redirectURL
 {
@@ -230,9 +265,6 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
         [[self rac_authenticateWithCode:oauthCode] subscribeNext:^(AFOAuthCredential *credential) {
             
             @strongify(self)
-            
-            // store the new credentials
-            self.oauthCredential = credential;
             
             // pass the credentials in the chain
             [self.pendingSubscriber sendNext:credential];
@@ -253,109 +285,8 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
     }
 }
 
-//RACCommand* command = [[RACCommand alloc] initWithSignalBlock:^(id _) {
-//    return [[[self.login loginSignalWithUsername:self.username password:self.password]
-//             doCompleted:^{
-//                 // move to next screen
-//             }]
-//            timeout:2.0 onScheduler:[RACScheduler mainThreadScheduler]];
-//}];
-//self.button.rac_command = command;
 
-
-//- (RACCommand *)rac_authenticateWithBrowser
-//{
-//    @weakify(self)
-//    return [[RACCommand alloc] initWithEnabled:[self rac_networkReachability]
-//                                   signalBlock:^RACSignal *(id input) {
-//                                       @strongify(self)
-//                                       
-//                                       // open the page in an external browser
-//#if TARGET_OS_IPHONE
-//                                       [[UIApplication sharedApplication] openURL:[self authenticateURL]];
-//#else
-//                                       [[NSWorkspace sharedWorkspace] openURL:[self authenticateURL]];
-//#endif
-//                                       
-//                                       // save a reference of the subscriber
-//                                       return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-//                                           self.pendingSubscriber = subscriber;
-//                                           
-//                                           return nil;
-//                                       }];
-//                                   }];
-//}
-
-
-
-//return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-//    
-//    
-//    return [RACDisposable disposableWithBlock:^{
-//    }];
-//    
-//}] setNameWithFormat:@"[%@] -bind:", self.class];
-
-- (RACSignal *)rac_authenticateWithCode:(NSString *)oauthCode
-{
-    @weakify(self)
-    return [[RACSignal createSignal:^(id<RACSubscriber> subscriber) {
-        
-        @strongify(self)
-        AFHTTPRequestOperation *operation =
-        [self.oauthManager authenticateUsingOAuthWithURLString:self.tokenURLString
-                                                          code:oauthCode
-                                                   redirectURI:self.oauthRedirectURI
-                                                       success:^(AFOAuthCredential *credential) {
-                                                           [subscriber sendNext:credential];
-                                                           [subscriber sendCompleted];
-                                                           
-                                                       } failure:^(NSError *error) {
-                                                           [subscriber sendError:error];
-                                                       }];
-        
-        return [RACDisposable disposableWithBlock:^{
-            [operation cancel];
-        }];
-        
-    }] setNameWithFormat:@"[%@] -rac_authenticateWithCode: %@", self.class, oauthCode];
-}
-
-- (RACSignal *)rac_auth
-{
-    return [RACSignal createSignal:^(id<RACSubscriber> subscriber) {
-        
-        AFHTTPRequestOperation *operation;
-        
-        if (self.oauthCredential.isExpired) {
-            operation = [self.oauthManager authenticateUsingOAuthWithURLString:self.tokenURLString
-                                                      refreshToken:self.oauthCredential.refreshToken
-                                                           success:^(AFOAuthCredential *credential) {
-                                                               
-                                                               
-                                                           } failure:^(NSError *error) {
-                                                               [subscriber sendError:error];
-                                                           }];
-            
-        } else {
-            operation = [self.oauthManager authenticateUsingOAuthWithURLString:self.tokenURLString
-                                                                          code:@""
-                                                                   redirectURI:@""
-                                                                       success:^(AFOAuthCredential *credential) {
-                                                                           
-                                                                           
-                                                                       } failure:^(NSError *error) {
-                                                                           [subscriber sendError:error];
-                                                                       }];
-        }
-        
-        
-        return [RACDisposable disposableWithBlock:^{
-            [operation cancel];
-        }];
-    }];
-}
-
+#pragma mark - HTTP Methods
 
 - (RACSignal *)rac_GET:(NSString *)path parameters:(id)parameters
 {
@@ -364,8 +295,22 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
 
 - (RACSignal *)rac_GET:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
 {
-    return [[self authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
+    return [[self rac_authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
         return [[self.networkManager rac_GET:path parameters:parameters retries:retries interval:interval] map:^id(RACTuple *response) {
+            return [response first];
+        }];
+    }];
+}
+
+- (RACSignal *)rac_HEAD:(NSString *)path parameters:(id)parameters
+{
+    return [self rac_HEAD:path parameters:parameters retries:1 interval:ACEDefaultTimeInterval];
+}
+
+- (RACSignal *)rac_HEAD:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
+{
+    return [[self rac_authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
+        return [[self.networkManager rac_HEAD:path parameters:parameters retries:retries interval:interval] map:^id(RACTuple *response) {
             return [response first];
         }];
     }];
@@ -373,36 +318,86 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
 
 - (RACSignal *)rac_POST:(NSString *)path parameters:(id)parameters
 {
-    return [self.networkManager rac_POST:path parameters:parameters retries:1];
+    return [self rac_POST:path parameters:parameters retries:1 interval:ACEDefaultTimeInterval];
 }
 
 - (RACSignal *)rac_POST:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
 {
-    return [self.networkManager rac_POST:path parameters:parameters retries:retries interval:interval];
+    return [[self rac_authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
+        return [[self.networkManager rac_POST:path parameters:parameters retries:retries interval:interval] map:^id(RACTuple *response) {
+            return [response first];
+        }];
+    }];
 }
-    
+
+- (RACSignal *)rac_PUT:(NSString *)path parameters:(id)parameters
+{
+    return [self rac_PUT:path parameters:parameters retries:1 interval:ACEDefaultTimeInterval];
+}
+
+- (RACSignal *)rac_PUT:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
+{
+    return [[self rac_authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
+        return [[self.networkManager rac_PUT:path parameters:parameters retries:retries interval:interval] map:^id(RACTuple *response) {
+            return [response first];
+        }];
+    }];
+}
+
+- (RACSignal *)rac_PATCH:(NSString *)path parameters:(id)parameters
+{
+    return [self rac_PATCH:path parameters:parameters retries:1 interval:ACEDefaultTimeInterval];
+}
+
+- (RACSignal *)rac_PATCH:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
+{
+    return [[self rac_authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
+        return [[self.networkManager rac_PATCH:path parameters:parameters retries:retries interval:interval] map:^id(RACTuple *response) {
+            return [response first];
+        }];
+    }];
+}
+
+- (RACSignal *)rac_DELETE:(NSString *)path parameters:(id)parameters
+{
+    return [self rac_DELETE:path parameters:parameters retries:1 interval:ACEDefaultTimeInterval];
+}
+
+- (RACSignal *)rac_DELETE:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
+{
+    return [[self rac_authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
+        return [[self.networkManager rac_DELETE:path parameters:parameters retries:retries interval:interval] map:^id(RACTuple *response) {
+            return [response first];
+        }];
+    }];
+}
+
+
+#pragma mark - Signals
+
+- (RACSignal *)rac_networkReachabilitySignal
+{
+    if (_networkReachabilitySignal == nil) {
+        _networkReachabilitySignal = RACObserve(self.reachabilityManager, reachable);
+    }
+    return _networkReachabilitySignal;
+}
+
+
+#pragma mark - Logger
+
+- (void)setLogging:(BOOL)logging
+{
+    if (_logging != logging) {
+        _logging = logging;
         
-//        NSURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:path relativeToURL:self.baseURL] absoluteString] parameters:parameters];
-//        
-//        AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:nil failure:nil];
-//        RACSignal* signal = [operation rac_overrideHTTPCompletionBlock];
-//        [self.operationQueue addOperation:operation];
-//        [signal subscribe:subscriber];
-//        return [RACDisposable disposableWithBlock:^{
-//            [operation cancel];
-//        }];
-//    }];
-//    
-//    return [[RACSignal createSignal:^(id<RACSubscriber> subscriber) {
-//        NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:path relativeToURL:self.baseURL] absoluteString] parameters:parameters constructingBodyWithBlock:block error:nil];
-//        
-//        RACURLSessionRetryDataTask *task = [self URLSessionRetryDataTaskForRequest:request numberOfRetries:retries retryInterval:interval test:testBlock subscriber:subscriber];
-//        
-//        [task resume];
-//        
-//        return [RACDisposable disposableWithBlock:^{
-//            [task cancel];
-//        }];
-//    }] setNameWithFormat:@"%@ -rac_POST: %@, parameters: %@, constructingBodyWithBlock:", self.class, path, parameters];
+        if (logging) {
+            [[AFNetworkActivityLogger sharedLogger] startLogging];
+            
+        } else {
+            [[AFNetworkActivityLogger sharedLogger] stopLogging];
+        }
+    }
+}
 
 @end

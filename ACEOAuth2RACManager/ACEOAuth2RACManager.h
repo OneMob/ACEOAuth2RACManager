@@ -298,7 +298,8 @@ NS_ASSUME_NONNULL_END
 
 
 
-- (nonnull RACSignal *)networkReachabilitySignal;
+- (nonnull RACSignal *)rac_networkReachabilitySignal;
+
 - (BOOL)handleRedirectURL:(nonnull NSURL *)redirectURL;
 
 @end
