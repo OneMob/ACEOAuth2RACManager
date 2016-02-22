@@ -1,10 +1,25 @@
+// ACEOAuth2RACManager.m
 //
-//  ACEOAuth2RACManager.m
-//  ACEOAuth2RACManagerDemo
+// Copyright (c) 2016 Stefano Acerbetti (https://github.com/acerbetti/ACEOAuth2RACManager)
 //
-//  Created by Stefano Acerbetti on 2/18/16.
-//  Copyright © 2016 Stefano Acerbetti. All rights reserved.
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
 
 #import "ACEOAuth2RACManager.h"
 #import "AFHTTPRequestSerializer+OAuth2.h"
@@ -72,7 +87,8 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
     return self;
 }
 
-#pragma mark - Log Activity
+
+#pragma mark - Logger
 
 - (void)setLogging:(BOOL)logging
 {
@@ -94,9 +110,11 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
 - (AFOAuthCredential *)oauthCredential
 {
     if (_oauthCredential == nil) {
-        if ([self.delegate respondsToSelector:@selector(retrieveCodedCredentialForNetworkManager:)]) {
+        if ([self.delegate respondsToSelector:@selector(retrieveCodedCredentialForNetworkManager:withIdentifier:)]) {
             // custom implementation
-            NSData *data = [self.delegate retrieveCodedCredentialForNetworkManager:self];
+            NSData *data = [self.delegate retrieveCodedCredentialForNetworkManager:self
+                            withIdentifier:self.oauthManager.serviceProviderIdentifier];
+            
             _oauthCredential = [NSUnarchiver unarchiveObjectWithData:data];
             
         } else {
@@ -116,14 +134,18 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
         [self.networkManager.requestSerializer setAuthorizationHeaderFieldWithCredential:oauthCredential];
         
         // save it
-        if ([self.delegate respondsToSelector:@selector(networkManager:storeCodedCredentials:)]) {
+        if ([self.delegate respondsToSelector:@selector(networkManager:storeCodedCredentials:withIdentifier:)]) {
             // custom implementation
             NSData *data = [NSArchiver archivedDataWithRootObject:oauthCredential];
-            [self.delegate networkManager:self storeCodedCredentials:data];
+            
+            [self.delegate networkManager:self
+                    storeCodedCredentials:data
+                           withIdentifier:self.oauthManager.serviceProviderIdentifier];
             
         } else {
             // default implementation
-            [AFOAuthCredential storeCredential:oauthCredential withIdentifier:self.oauthManager.serviceProviderIdentifier];
+            [AFOAuthCredential storeCredential:oauthCredential
+                                withIdentifier:self.oauthManager.serviceProviderIdentifier];
         }
     }
 }
@@ -206,8 +228,10 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
         
         @weakify(self)
         [[self rac_authenticateWithCode:oauthCode] subscribeNext:^(AFOAuthCredential *credential) {
+            
             @strongify(self)
             
+            // store the new credentials
             self.oauthCredential = credential;
             
             // pass the credentials in the chain
@@ -215,8 +239,8 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
             [self.pendingSubscriber sendCompleted];
             
         } error:^(NSError *error) {
-            @strongify(self)
             
+            @strongify(self)
             [self.pendingSubscriber sendError:error];
         }];
         
@@ -276,6 +300,7 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
 {
     @weakify(self)
     return [[RACSignal createSignal:^(id<RACSubscriber> subscriber) {
+        
         @strongify(self)
         AFHTTPRequestOperation *operation =
         [self.oauthManager authenticateUsingOAuthWithURLString:self.tokenURLString
@@ -339,8 +364,10 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
 
 - (RACSignal *)rac_GET:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
 {
-    return [[self.networkManager rac_GET:path parameters:parameters retries:retries interval:interval] map:^id(RACTuple *response) {
-        return [response first];
+    return [[self authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
+        return [[self.networkManager rac_GET:path parameters:parameters retries:retries interval:interval] map:^id(RACTuple *response) {
+            return [response first];
+        }];
     }];
 }
 
