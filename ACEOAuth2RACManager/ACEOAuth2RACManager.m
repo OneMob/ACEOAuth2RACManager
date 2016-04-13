@@ -1,6 +1,6 @@
 // ACEOAuth2RACManager.m
 //
-// Copyright (c) 2016 Stefano Acerbetti (https://github.com/acerbetti/ACEOAuth2RACManager)
+// Copyright (c) 2016 Stefano Acerbetti - https://github.com/acerbetti/ACEOAuth2RACManager
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -134,7 +134,7 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
             NSData *data = [self.delegate retrieveCodedCredentialForNetworkManager:self
                                                                     withIdentifier:self.oauthManager.serviceProviderIdentifier];
             
-            _oauthCredential = [NSUnarchiver unarchiveObjectWithData:data];
+            _oauthCredential = [NSKeyedUnarchiver unarchiveObjectWithData:data];
             
         } else {
             // default implementation
@@ -155,7 +155,7 @@ NSTimeInterval const ACEDefaultTimeInterval = 5.0;
         // save it
         if ([self.delegate respondsToSelector:@selector(networkManager:storeCodedCredentials:withIdentifier:)]) {
             // custom implementation
-            NSData *data = [NSArchiver archivedDataWithRootObject:oauthCredential];
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:oauthCredential];
             
             [self.delegate networkManager:self
                     storeCodedCredentials:data

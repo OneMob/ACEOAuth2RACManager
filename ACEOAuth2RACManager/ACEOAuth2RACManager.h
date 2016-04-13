@@ -1,6 +1,6 @@
 // ACEOAuth2RACManager.h
 //
-// Copyright (c) 2016 Stefano Acerbetti (https://github.com/acerbetti/ACEOAuth2RACManager)
+// Copyright (c) 2016 Stefano Acerbetti - https://github.com/acerbetti/ACEOAuth2RACManager
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,11 +21,13 @@
 // THE SOFTWARE.
 
 
+#import <Foundation/Foundation.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 extern NSTimeInterval const ACEDefaultTimeInterval;
 
 @class ACEOAuth2RACManager;
+@class AFHTTPSessionManager;
 
 /**
  `ACEOAuth2RACManagerDelegate` is a protocol to extend the network manager
@@ -84,6 +86,9 @@ extern NSTimeInterval const ACEDefaultTimeInterval;
  To track in the console log all the network calls
  */
 @property (nonatomic, assign, getter=isLogging) BOOL logging;
+
+
+@property (nonatomic, strong, readonly, nonnull) AFHTTPSessionManager *networkManager;
 
 
 
