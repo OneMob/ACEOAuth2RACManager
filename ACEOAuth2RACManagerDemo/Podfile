@@ -1,6 +1,3 @@
 target 'ACEOAuth2RACManagerDemo' do
-    pod 'AFOAuth2Manager', '~> 3.0'
-    pod 'AFNetworkActivityLogger', :git => 'git@github.com:acerbetti/AFNetworkActivityLogger.git'
-    pod 'AFNetworking-RACRetryExtensions', :git => 'git@github.com:acerbetti/AFNetworking-RACRetryExtensions.git'
-    pod 'NSURL+QueryDictionary', '~> 1.1'
+    pod 'ACEOAuth2RACManager'
 end

@@ -14,9 +14,7 @@
 		50BB0D431C76CE9F00E7880F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50BB0D421C76CE9F00E7880F /* Assets.xcassets */; };
 		50BB0D461C76CE9F00E7880F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50BB0D441C76CE9F00E7880F /* LaunchScreen.storyboard */; };
 		50BB0D511C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB0D501C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.m */; };
-		50BB0D5E1C76D42100E7880F /* ACEOAuth2RACManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB0D5D1C76D42100E7880F /* ACEOAuth2RACManager.m */; };
 		597A4935D8EF25176A06A379 /* libPods-ACEOAuth2RACManagerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A07FF35870F9EECFF112E02 /* libPods-ACEOAuth2RACManagerDemo.a */; };
-		80C318BB1D380F0800DC6852 /* ACEOAuth2RACCoordinators.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C318B71D380F0800DC6852 /* ACEOAuth2RACCoordinators.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,11 +42,6 @@
 		50BB0D4C1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACEOAuth2RACManagerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50BB0D501C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEOAuth2RACManagerDemoTests.m; sourceTree = "<group>"; };
 		50BB0D521C76CE9F00E7880F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		50BB0D5C1C76D42100E7880F /* ACEOAuth2RACManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEOAuth2RACManager.h; sourceTree = "<group>"; };
-		50BB0D5D1C76D42100E7880F /* ACEOAuth2RACManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEOAuth2RACManager.m; sourceTree = "<group>"; };
-		80C318B61D380F0800DC6852 /* ACEOAuth2RACCoordinators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEOAuth2RACCoordinators.h; sourceTree = "<group>"; };
-		80C318B71D380F0800DC6852 /* ACEOAuth2RACCoordinators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEOAuth2RACCoordinators.m; sourceTree = "<group>"; };
-		80C318BA1D380F0800DC6852 /* ACEOAuth2RACProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEOAuth2RACProtocols.h; sourceTree = "<group>"; };
 		8A07FF35870F9EECFF112E02 /* libPods-ACEOAuth2RACManagerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ACEOAuth2RACManagerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6B8160668DE29852F9273EF /* Pods-ACEOAuth2RACManagerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEOAuth2RACManagerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACEOAuth2RACManagerDemo/Pods-ACEOAuth2RACManagerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,7 +76,6 @@
 		50BB0D2A1C76CE9F00E7880F = {
 			isa = PBXGroup;
 			children = (
-				50BB0D5B1C76D3CF00E7880F /* ACEOAuth2RACManager */,
 				50BB0D351C76CE9F00E7880F /* ACEOAuth2RACManagerDemo */,
 				50BB0D4F1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests */,
 				50BB0D341C76CE9F00E7880F /* Products */,
@@ -132,19 +124,6 @@
 				50BB0D521C76CE9F00E7880F /* Info.plist */,
 			);
 			path = ACEOAuth2RACManagerDemoTests;
-			sourceTree = "<group>";
-		};
-		50BB0D5B1C76D3CF00E7880F /* ACEOAuth2RACManager */ = {
-			isa = PBXGroup;
-			children = (
-				80C318B61D380F0800DC6852 /* ACEOAuth2RACCoordinators.h */,
-				80C318B71D380F0800DC6852 /* ACEOAuth2RACCoordinators.m */,
-				50BB0D5C1C76D42100E7880F /* ACEOAuth2RACManager.h */,
-				50BB0D5D1C76D42100E7880F /* ACEOAuth2RACManager.m */,
-				80C318BA1D380F0800DC6852 /* ACEOAuth2RACProtocols.h */,
-			);
-			name = ACEOAuth2RACManager;
-			path = ../ACEOAuth2RACManager;
 			sourceTree = "<group>";
 		};
 		D33DEE3CD2F9C2BEAC0FEA1F /* Pods */ = {
@@ -307,9 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80C318BB1D380F0800DC6852 /* ACEOAuth2RACCoordinators.m in Sources */,
 				50BB0D3E1C76CE9F00E7880F /* ViewController.m in Sources */,
-				50BB0D5E1C76D42100E7880F /* ACEOAuth2RACManager.m in Sources */,
 				50BB0D3B1C76CE9F00E7880F /* AppDelegate.m in Sources */,
 				50BB0D381C76CE9F00E7880F /* main.m in Sources */,
 			);
