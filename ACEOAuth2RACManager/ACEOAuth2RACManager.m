@@ -252,16 +252,18 @@ NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
                                                      
                                                      [[[[[self rac_authenticateWithCoordinatorSignal] subscribeOn:[RACScheduler mainThreadScheduler]]
                                                         doCompleted:^{
-                                                            [OMAnalyticsKit logLoginWithMethod:@"OAuth"
-                                                                                    serverName:[self.networkManager.baseURL host]
-                                                                                       success:YES];
+                                                            
+                                                            if ([self.delegate respondsToSelector:@selector(networkManager:authenticatedWithType:)]) {
+                                                                [self.delegate networkManager:self authenticatedWithType:[self.coordinator coordinatorType]];
+                                                            }
                                                             
                                                         }] doError:^(NSError *error) {
-                                                            [OMAnalyticsKit logLoginWithMethod:@"OAuth"
-                                                                                    serverName:[self.networkManager.baseURL host]
-                                                                                       success:NO];
-                                                        }]
-                                                      subscribe:subscriber];
+                                                            
+                                                            if ([self.delegate respondsToSelector:@selector(networkManager:failedAuthenticationWithError:forType:)]) {
+                                                                [self.delegate networkManager:self failedAuthenticationWithError:error forType:[self.coordinator coordinatorType]];
+                                                            }
+                                                            
+                                                        }] subscribe:subscriber];
                                                      
                                                  } else if (self.oauthCredential.isExpired) {
                                                      ACE_LOG_DEBUG(@"Auth with refresh token");
@@ -278,9 +280,10 @@ NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
                                                                
                                                            }] waitUntilCompleted:&error]) {
                                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                                   [OMAnalyticsKit logLoginWithMethod:@"Token"
-                                                                                           serverName:[self.networkManager.baseURL host]
-                                                                                              success:YES];
+                                                                   
+                                                                   if ([self.delegate respondsToSelector:@selector(networkManager:authenticatedWithType:)]) {
+                                                                       [self.delegate networkManager:self authenticatedWithType:@"RefreshToken"];
+                                                                   }
                                                                    
                                                                    [subscriber sendNext:self.oauthCredential];
                                                                    [subscriber sendCompleted];
@@ -288,9 +291,10 @@ NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
                                                                
                                                            } else {
                                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                                   [OMAnalyticsKit logLoginWithMethod:@"Token"
-                                                                                           serverName:[self.networkManager.baseURL host]
-                                                                                              success:NO];
+                                                                   
+                                                                   if ([self.delegate respondsToSelector:@selector(networkManager:failedAuthenticationWithError:forType:)]) {
+                                                                       [self.delegate networkManager:self failedAuthenticationWithError:error forType:@"RefreshToken"];
+                                                                   }
                                                                    
                                                                    [subscriber sendError:error];
                                                                });

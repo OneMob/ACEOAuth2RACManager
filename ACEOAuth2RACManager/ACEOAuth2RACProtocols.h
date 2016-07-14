@@ -27,6 +27,8 @@
 
 @protocol ACEOAuth2RACManagerCoordinator <NSObject>
 
+- (nonnull NSString *)coordinatorType;
+
 - (void)oauthManagerWillBeginAuthentication:(nonnull ACEOAuth2RACManager *)manager withURL:(nonnull NSURL *)oauthURL;
 
 @optional
@@ -44,6 +46,13 @@
 @protocol ACEOAuth2RACManagerDelegate <NSObject>
 
 @optional
+
+- (void)networkManager:(nonnull ACEOAuth2RACManager *)manager
+ authenticatedWithType:(nonnull NSString *)type;
+
+- (void)networkManager:(nonnull ACEOAuth2RACManager *)manager
+failedAuthenticationWithError:(nonnull NSError *)error
+               forType:(nonnull NSString *)type;
 
 /**
  Retrieve the coded data with the OAuth credentials from a custom store.

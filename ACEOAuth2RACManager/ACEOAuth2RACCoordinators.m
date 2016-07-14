@@ -28,6 +28,11 @@
 
 @implementation ACEOAuth2RACBrowserCoordinator
 
+- (NSString *)coordinatorType
+{
+    return @"Browser";
+}
+
 - (void)oauthManagerWillBeginAuthentication:(ACEOAuth2RACManager *)manager withURL:(NSURL *)oauthURL
 {
     // open the page in an external browser
@@ -63,6 +68,11 @@
         self.presentingController = presentingController;
     }
     return self;
+}
+
+- (NSString *)coordinatorType
+{
+    return @"WebView";
 }
 
 - (void)oauthManagerWillBeginAuthentication:(ACEOAuth2RACManager *)manager withURL:(NSURL *)oauthURL
