@@ -16,6 +16,7 @@
 		50BB0D511C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB0D501C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.m */; };
 		50BB0D5E1C76D42100E7880F /* ACEOAuth2RACManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB0D5D1C76D42100E7880F /* ACEOAuth2RACManager.m */; };
 		597A4935D8EF25176A06A379 /* libPods-ACEOAuth2RACManagerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A07FF35870F9EECFF112E02 /* libPods-ACEOAuth2RACManagerDemo.a */; };
+		80C318BB1D380F0800DC6852 /* ACEOAuth2RACCoordinators.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C318B71D380F0800DC6852 /* ACEOAuth2RACCoordinators.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,9 @@
 		50BB0D521C76CE9F00E7880F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50BB0D5C1C76D42100E7880F /* ACEOAuth2RACManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEOAuth2RACManager.h; sourceTree = "<group>"; };
 		50BB0D5D1C76D42100E7880F /* ACEOAuth2RACManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEOAuth2RACManager.m; sourceTree = "<group>"; };
+		80C318B61D380F0800DC6852 /* ACEOAuth2RACCoordinators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEOAuth2RACCoordinators.h; sourceTree = "<group>"; };
+		80C318B71D380F0800DC6852 /* ACEOAuth2RACCoordinators.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACEOAuth2RACCoordinators.m; sourceTree = "<group>"; };
+		80C318BA1D380F0800DC6852 /* ACEOAuth2RACProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACEOAuth2RACProtocols.h; sourceTree = "<group>"; };
 		8A07FF35870F9EECFF112E02 /* libPods-ACEOAuth2RACManagerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ACEOAuth2RACManagerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6B8160668DE29852F9273EF /* Pods-ACEOAuth2RACManagerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEOAuth2RACManagerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACEOAuth2RACManagerDemo/Pods-ACEOAuth2RACManagerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,8 +137,11 @@
 		50BB0D5B1C76D3CF00E7880F /* ACEOAuth2RACManager */ = {
 			isa = PBXGroup;
 			children = (
+				80C318B61D380F0800DC6852 /* ACEOAuth2RACCoordinators.h */,
+				80C318B71D380F0800DC6852 /* ACEOAuth2RACCoordinators.m */,
 				50BB0D5C1C76D42100E7880F /* ACEOAuth2RACManager.h */,
 				50BB0D5D1C76D42100E7880F /* ACEOAuth2RACManager.m */,
+				80C318BA1D380F0800DC6852 /* ACEOAuth2RACProtocols.h */,
 			);
 			name = ACEOAuth2RACManager;
 			path = ../ACEOAuth2RACManager;
@@ -156,12 +163,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50BB0D551C76CE9F00E7880F /* Build configuration list for PBXNativeTarget "ACEOAuth2RACManagerDemo" */;
 			buildPhases = (
-				0EEDE37068A53147AAF88F94 /* Check Pods Manifest.lock */,
+				0EEDE37068A53147AAF88F94 /* [CP] Check Pods Manifest.lock */,
 				50BB0D2F1C76CE9F00E7880F /* Sources */,
 				50BB0D301C76CE9F00E7880F /* Frameworks */,
 				50BB0D311C76CE9F00E7880F /* Resources */,
-				23F0D2BB417BDC60F9259DC6 /* Embed Pods Frameworks */,
-				93473C4BAC4FC3D59E2554BF /* Copy Pods Resources */,
+				23F0D2BB417BDC60F9259DC6 /* [CP] Embed Pods Frameworks */,
+				93473C4BAC4FC3D59E2554BF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -248,14 +255,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0EEDE37068A53147AAF88F94 /* Check Pods Manifest.lock */ = {
+		0EEDE37068A53147AAF88F94 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,14 +270,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		23F0D2BB417BDC60F9259DC6 /* Embed Pods Frameworks */ = {
+		23F0D2BB417BDC60F9259DC6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,14 +285,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACEOAuth2RACManagerDemo/Pods-ACEOAuth2RACManagerDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		93473C4BAC4FC3D59E2554BF /* Copy Pods Resources */ = {
+		93473C4BAC4FC3D59E2554BF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80C318BB1D380F0800DC6852 /* ACEOAuth2RACCoordinators.m in Sources */,
 				50BB0D3E1C76CE9F00E7880F /* ViewController.m in Sources */,
 				50BB0D5E1C76D42100E7880F /* ACEOAuth2RACManager.m in Sources */,
 				50BB0D3B1C76CE9F00E7880F /* AppDelegate.m in Sources */,

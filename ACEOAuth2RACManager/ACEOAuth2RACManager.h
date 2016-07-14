@@ -21,51 +21,53 @@
 // THE SOFTWARE.
 
 
-#import <Foundation/Foundation.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import "ACEOAuth2RACProtocols.h"
 
-extern NSTimeInterval const ACEDefaultTimeInterval;
 
-@class ACEOAuth2RACManager;
+/**
+ *  Automatically detect if CocoaLumberJack is available and if so use
+ *  it as a logging facility.
+ */
+
+#if defined(__has_include) && __has_include("CocoaLumberjack/CocoaLumberjack.h")
+
+#import <CocoaLumberjack/CocoaLumberjack.h>
+
+#undef LOG_LEVEL_DEF
+#define LOG_LEVEL_DEF GCDWebServerLogLevel
+extern DDLogLevel GCDWebServerLogLevel;
+
+#define ACE_LOG_DEBUG(...)      DDLogDebug(__VA_ARGS__)
+#define ACE_LOG_VERBOSE(...)    DDLogVerbose(__VA_ARGS__)
+#define ACE_LOG_INFO(...)       DDLogInfo(__VA_ARGS__)
+#define ACE_LOG_WARNING(...)    DDLogWarn(__VA_ARGS__)
+#define ACE_LOG_ERROR(...)      DDLogError(__VA_ARGS__)
+
+#else
+
+#define ACE_LOG_DEBUG(...)      NSLog(__VA_ARGS__)
+#define ACE_LOG_VERBOSE(...)    NSLog(__VA_ARGS__)
+#define ACE_LOG_INFO(...)       NSLog(__VA_ARGS__)
+#define ACE_LOG_WARNING(...)    NSLog(__VA_ARGS__)
+#define ACE_LOG_ERROR(...)      NSLog(__VA_ARGS__)
+
+#endif
+
+
+extern NSTimeInterval const ACEDefaultRetryTimeInterval;
+
 @class AFHTTPSessionManager;
-
-/**
- `ACEOAuth2RACManagerDelegate` is a protocol to extend the network manager
- */
-@protocol ACEOAuth2RACManagerDelegate <NSObject>
-
-@optional
-
-/**
- Retrieve the coded data with the OAuth credentials from a custom store.
- 
- @param manager The network manager making the call.
- @param identifier An unique string to identify the current host.
- 
- @return A coded data ready to be persisted in the custom store
- */
-- (nonnull NSData *)retrieveCodedCredentialForNetworkManager:(nonnull ACEOAuth2RACManager *)manager
-                                              withIdentifier:(nonnull NSString *)identifier;
-
-/**
- Store the coded data with the OAuth credentials into a custom store.
- 
- @param manager The network manager making the call.
- @param credentials The coded credentials ready to be persisted in a custom store.
- @param identifier An unique string to identify the current host.
- */
-- (void)networkManager:(nonnull ACEOAuth2RACManager *)manager
- storeCodedCredentials:(nonnull NSData *)credentials
-        withIdentifier:(nonnull NSString *)identifier;
-
-@end
-
-#pragma mark -
 
 /**
  `ACEOAuth2RACManager` is a class that helps to manage the network connection to a server using OAuth2 for authentication
  */
 @interface ACEOAuth2RACManager : NSObject
+
+/**
+ The coordinator in charge of the authentication flow
+ */
+@property (nonatomic, strong, nonnull) id<ACEOAuth2RACManagerCoordinator> coordinator;
 
 /**
  The delegate to extend the manager with a different way to store the OAuth credentials
@@ -302,11 +304,27 @@ NS_ASSUME_NONNULL_END
 ///--------------------
 
 /**
+ Return a signal that check if a user has a valid session.
+ 
+ @return The signal that monitor the user session.
+ */
+- (nonnull RACSignal *)rac_authenticate;
+
+
+/**
  Return a signal observing the reachability of the specified host.
  
  @return The signal that monitor the network reachability.
  */
 - (nonnull RACSignal *)rac_networkReachabilitySignal;
+
+
+/**
+ Return a signal to revoke the authentication token
+ 
+ @return The signal to execute the command to revoke the token.
+ */
+- (nonnull RACSignal *)rac_revokeTokenSignal;
 
 
 #pragma mark - HTTP methods
@@ -322,6 +340,8 @@ NS_ASSUME_NONNULL_END
  
  @return YES if the authentication code is set, NO otherwise.
  */
-- (BOOL)handleRedirectURL:(nonnull NSURL *)redirectURL;
+- (BOOL)handleRedirectURL:(nullable NSURL *)redirectURL;
+
+- (void)handleRedirectError:(nonnull NSError *)redirectError;
 
 @end
