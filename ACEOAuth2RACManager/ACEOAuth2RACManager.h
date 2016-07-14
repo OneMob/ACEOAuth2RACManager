@@ -34,10 +34,6 @@
 
 #import <CocoaLumberjack/CocoaLumberjack.h>
 
-#undef LOG_LEVEL_DEF
-#define LOG_LEVEL_DEF GCDWebServerLogLevel
-extern DDLogLevel GCDWebServerLogLevel;
-
 #define ACE_LOG_DEBUG(...)      DDLogDebug(__VA_ARGS__)
 #define ACE_LOG_VERBOSE(...)    DDLogVerbose(__VA_ARGS__)
 #define ACE_LOG_INFO(...)       DDLogInfo(__VA_ARGS__)

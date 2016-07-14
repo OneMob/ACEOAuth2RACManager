@@ -25,14 +25,6 @@
 
 #import <objc/runtime.h>
 
-#if _DDLOG_ENABLED
-    #if DEBUG
-        DDLogLevel AFHTTPRequestLogLevel = DDLogLevelDebug;
-    #else
-        DDLogLevel AFHTTPRequestLogLevel = DDLogLevelInfo;
-    #endif
-#endif
-
 static NSURLRequest * AFNetworkRequestFromNotification(NSNotification *notification) {
     NSURLRequest *request = nil;
     if ([[notification object] respondsToSelector:@selector(originalRequest)]) {

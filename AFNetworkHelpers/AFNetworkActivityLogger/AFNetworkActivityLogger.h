@@ -26,12 +26,6 @@
 
 #import <CocoaLumberjack/CocoaLumberjack.h>
 
-#define _DDLOG_ENABLED 1
-
-#undef LOG_LEVEL_DEF
-#define LOG_LEVEL_DEF AFHTTPRequestLogLevel
-extern DDLogLevel AFHTTPRequestLogLevel;
-
 #define AF_LOG_DEBUG(...)   DDLogDebug(__VA_ARGS__)
 #define AF_LOG_INFO(...)    DDLogInfo(__VA_ARGS__)
 #define AF_LOG_ERROR(...)   DDLogError(__VA_ARGS__)

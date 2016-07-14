@@ -32,7 +32,6 @@
 
 NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
 
-
 @interface ACEOAuth2RACManager ()
 // managers
 @property (nonatomic, strong) AFHTTPSessionManager *networkManager;
