@@ -15,6 +15,7 @@ Pod::Spec.new do |s|
   # s.tvos.deployment_target = '9.0'
 
   s.dependency 'AFOAuth2Manager', '~> 3.0'
-  s.dependency 'NSURL+QueryDictionary', '~> 1.1'
+  s.dependency 'ReactiveCocoa', '~> 2.5'
+  s.dependency 'NSURL+QueryDictionary', '~> 1.2'
 
 end
