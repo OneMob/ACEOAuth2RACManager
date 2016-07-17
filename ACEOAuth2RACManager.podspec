@@ -1,6 +1,7 @@
 Pod::Spec.new do |s|
+
   s.name     = 'ACEOAuth2RACManager'
-  s.version  = '1.0.2'
+  s.version  = '1.0.3'
   s.license  = 'MIT'
   s.summary  = 'Network manager with RAC OAuth2 support.'
   s.homepage = 'https://github.com/acerbetti/ACEOAuth2RACManager'
@@ -17,5 +18,9 @@ Pod::Spec.new do |s|
   s.dependency 'AFOAuth2Manager', '~> 3.0'
   s.dependency 'ReactiveCocoa', '~> 2.5'
   s.dependency 'NSURL+QueryDictionary', '~> 1.2'
+
+  s.subspec 'AppExtension' do |ss|
+    ss.xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) ACE_APP_EXTENSION' }
+  end
 
 end

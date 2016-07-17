@@ -26,6 +26,8 @@
 
 #import "NSURL+QueryDictionary.h"
 
+#if !ACE_APP_EXTESION
+
 @implementation ACEOAuth2RACBrowserCoordinator
 
 - (NSString *)coordinatorType
@@ -45,6 +47,8 @@
 }
 
 @end
+
+#endif
 
 #if TARGET_OS_IPHONE
 

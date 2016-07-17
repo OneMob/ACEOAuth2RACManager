@@ -100,14 +100,6 @@ NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
 
 #pragma mark - Properties
 
-- (id<ACEOAuth2RACManagerCoordinator>)coordinator
-{
-    if (_coordinator == nil) {
-        _coordinator = [ACEOAuth2RACBrowserCoordinator new];
-    }
-    return _coordinator;
-}
-
 - (NSURL *)authenticateURL
 {
     NSURL *authenticateURL = [self.oauthManager.baseURL URLByAppendingPathComponent:self.authorizeURLString];

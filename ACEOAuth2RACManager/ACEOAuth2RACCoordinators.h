@@ -23,9 +23,13 @@
 
 #import "ACEOAuth2RACProtocols.h"
 
+#if !ACE_APP_EXTESION
+
 @interface ACEOAuth2RACBrowserCoordinator : NSObject<ACEOAuth2RACManagerCoordinator>
 
 @end
+
+#endif
 
 #if TARGET_OS_IPHONE
 
