@@ -23,7 +23,7 @@
 
 #import "ACEOAuth2RACProtocols.h"
 
-#if !ACE_APP_EXTENSION
+#if !OAUTH_APP_EXTENSION
 
 @interface ACEOAuth2RACBrowserCoordinator : NSObject<ACEOAuth2RACManagerCoordinator>
 
