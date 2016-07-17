@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.source_files  = 'ACEOAuth2RACManager/*.{h,m}', 'AFNetworkHelpers/**/*.{h,m}'
   s.requires_arc = true
   
-  s.ios.deployment_target = '7.0'
+  s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.9'
   # s.watchos.deployment_target = '2.0'
   # s.tvos.deployment_target = '9.0'
@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   s.dependency 'NSURL+QueryDictionary', '~> 1.2'
 
   s.subspec 'AppExtension' do |ss|
+    ss.ios.deployment_target = '8.0'
     ss.xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) ACE_APP_EXTENSION' }
   end
 
