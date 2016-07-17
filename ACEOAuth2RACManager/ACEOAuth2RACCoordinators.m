@@ -26,7 +26,7 @@
 
 #import "NSURL+QueryDictionary.h"
 
-#if !ACE_APP_EXTESION
+#if !ACE_APP_EXTENSION
 
 @implementation ACEOAuth2RACBrowserCoordinator
 
