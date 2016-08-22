@@ -61,6 +61,9 @@
 @property (nonatomic, strong) UIViewController *presentingController;
 @property (nonatomic, strong) UIActivityIndicatorView *loadingView;
 
+@property (nonatomic, strong) UIWebView *authWebView;
+@property (nonatomic, strong) NSURL *authURL;
+
 @end
 
 @implementation ACEOAuth2RACWebViewCoordinator
@@ -69,7 +72,12 @@
 {
     self = [super init];
     if (self) {
+        // save a reference
         self.presentingController = presentingController;
+        
+        // create the loading indicator
+        self.loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.loadingView.hidesWhenStopped = YES;
     }
     return self;
 }
@@ -83,26 +91,30 @@
 {
     // set a reference for the manager
     self.authManager = manager;
+    self.authURL = oauthURL;
     
     // load the web page
-    UIWebView *webView = [UIWebView new];
-    [webView setDelegate:self];
-    [webView.scrollView setBounces:NO];
-    [webView loadRequest:[NSURLRequest requestWithURL:oauthURL]];
-    
-    // create the loading indicator
-    self.loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.loadingView.hidesWhenStopped = YES;
+    self.authWebView = [UIWebView new];
+    [self.authWebView setDelegate:self];
+    [self.authWebView.scrollView setBounces:NO];
+    [self.authWebView loadRequest:[NSURLRequest requestWithURL:oauthURL]];
     
     // prepare the container
     UIViewController *loginController = [UIViewController new];
-    loginController.view = webView;
+    loginController.view = self.authWebView;
     loginController.title = self.title;
+    loginController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                                                                     target:self action:@selector(reload:)];
     loginController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.loadingView];
     
     // show as modal view controller
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginController];
     [self.presentingController presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (void)reload:(id)sender
+{
+    [self.authWebView loadRequest:[NSURLRequest requestWithURL:self.authURL]];
 }
 
 

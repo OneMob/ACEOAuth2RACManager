@@ -41,6 +41,8 @@
 
 @property (nonatomic, strong, nullable) NSString *title;
 
+@property (nonatomic, strong, readonly, nullable) UIActivityIndicatorView *loadingView;
+
 NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithPresentingController:(nonnull UIViewController *)presentingController;
