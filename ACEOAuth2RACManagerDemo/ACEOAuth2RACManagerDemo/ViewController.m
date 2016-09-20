@@ -28,7 +28,7 @@
     
     self.m.logging = YES;
     
-    self.loginButton.rac_command = [self.m rac_authenticateWithBrowser];
+//    self.loginButton.rac_command = [self.m rac_authenticateWithBrowser];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -22,34 +22,7 @@
 
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import "ACEOAuth2RACProtocols.h"
-
-
-/**
- *  Automatically detect if CocoaLumberJack is available and if so use
- *  it as a logging facility.
- */
-
-#if defined(__has_include) && __has_include("CocoaLumberjack/CocoaLumberjack.h")
-
-#import <CocoaLumberjack/CocoaLumberjack.h>
-
-#define ACE_LOG_DEBUG(...)      DDLogDebug(__VA_ARGS__)
-#define ACE_LOG_VERBOSE(...)    DDLogVerbose(__VA_ARGS__)
-#define ACE_LOG_INFO(...)       DDLogInfo(__VA_ARGS__)
-#define ACE_LOG_WARNING(...)    DDLogWarn(__VA_ARGS__)
-#define ACE_LOG_ERROR(...)      DDLogError(__VA_ARGS__)
-
-#else
-
-#define ACE_LOG_DEBUG(...)      NSLog(__VA_ARGS__)
-#define ACE_LOG_VERBOSE(...)    NSLog(__VA_ARGS__)
-#define ACE_LOG_INFO(...)       NSLog(__VA_ARGS__)
-#define ACE_LOG_WARNING(...)    NSLog(__VA_ARGS__)
-#define ACE_LOG_ERROR(...)      NSLog(__VA_ARGS__)
-
-#endif
-
+#import "ACEOAuth2RACCoordinators.h"
 
 extern NSTimeInterval const ACEDefaultRetryTimeInterval;
 
@@ -85,6 +58,7 @@ extern NSTimeInterval const ACEDefaultRetryTimeInterval;
  */
 @property (nonatomic, assign, getter=isLogging) BOOL logging;
 
+@property (nonatomic, strong, readonly, nonnull) NSDictionary *authParameters;
 
 @property (nonatomic, strong, readonly, nonnull) AFHTTPSessionManager *networkManager;
 

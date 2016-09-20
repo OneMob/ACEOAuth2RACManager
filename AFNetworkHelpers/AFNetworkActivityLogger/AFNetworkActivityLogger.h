@@ -22,23 +22,6 @@
 
 #import <Foundation/Foundation.h>
 
-#if defined(__has_include) && __has_include("CocoaLumberjack/CocoaLumberjack.h")
-
-#import <CocoaLumberjack/CocoaLumberjack.h>
-
-#define AF_LOG_DEBUG(...)   DDLogDebug(__VA_ARGS__)
-#define AF_LOG_INFO(...)    DDLogInfo(__VA_ARGS__)
-#define AF_LOG_ERROR(...)   DDLogError(__VA_ARGS__)
-
-#else
-
-#define AF_LOG_DEBUG(...)   NSLog(__VA_ARGS__)
-#define AF_LOG_INFO(...)    NSLog(__VA_ARGS__)
-#define AF_LOG_ERROR(...)   NSLog(__VA_ARGS__)
-
-#endif
-
-
 typedef NS_ENUM(NSUInteger, AFHTTPRequestLoggerLevel) {
   AFLoggerLevelOff,
   AFLoggerLevelDebug,

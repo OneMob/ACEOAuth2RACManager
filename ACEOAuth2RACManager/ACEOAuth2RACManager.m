@@ -22,15 +22,25 @@
 
 
 #import "ACEOAuth2RACManager.h"
+#import "ACEOAuth2RACManagerPrivate.h"
 #import "ACEOAuth2RACCoordinators.h"
 
 #import "AFHTTPRequestSerializer+OAuth2.h"
 #import "AFHTTPSessionManager+RACRetrySupport.h"
 #import "AFNetworkActivityLogger.h"
 #import "AFOAuth2Manager.h"
-#import "NSURL+QueryDictionary.h"
+#import <NSURL+QueryDictionary/NSURL+QueryDictionary.h>
 
 NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
+
+#if _DDLOG_ENABLED
+    #if DEBUG
+        const DDLogLevel ACELogLevel = DDLogLevelDebug;
+    #else
+        const DDLogLevel ACELogLevel = DDLogLevelInfo;
+    #endif
+#endif
+
 
 @interface ACEOAuth2RACManager ()
 // managers
