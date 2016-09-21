@@ -26,7 +26,7 @@
  *  it as a logging facility.
  */
 
-#if defined(__has_include) && __has_include("CocoaLumberjack/CocoaLumberjack.h") && !OAUTH_APP_EXTENSION
+#if defined(__has_include) && __has_include("CocoaLumberjack/CocoaLumberjack.h")
 
 #import <CocoaLumberjack/CocoaLumberjack.h>
 

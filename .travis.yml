@@ -1,0 +1,6 @@
+language: objective-c
+osx_image: xcode7.2
+xcode_project: ACEOAuth2RACManagerDemo/ACEOAuth2RACManagerDemo.xcodeproj
+xcode_scheme: ACEOAuth2RACManagerDemo
+xcode_sdk: iphonesimulator9.2
+pod install

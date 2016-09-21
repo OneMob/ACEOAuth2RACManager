@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name     = 'ACEOAuth2RACManager'
-  s.version  = '1.0.8'
+  s.version  = '1.0.9'
   s.license  = 'MIT'
   s.summary  = 'Network manager with RAC OAuth2 support.'
   s.homepage = 'https://github.com/acerbetti/ACEOAuth2RACManager'
@@ -35,7 +35,8 @@ Pod::Spec.new do |s|
   s.subspec 'Core' do |ss|
     ss.ios.deployment_target = '8.0'
     ss.osx.deployment_target = '10.9'
-    ss.source_files = 'ACEOAuth2RACManager/*.{h,m}'
+    ss.source_files  = 'ACEOAuth2RACManager/*.{h,m}'
+    ss.exclude_files = 'ACEOAuth2RACManager/ACEOAuth2RACManagerPrivate.h'
     ss.dependency 'ACEOAuth2RACManager/AFNetworkActivityLogger'
     ss.dependency 'ACEOAuth2RACManager/AFNetworking-RACRetryExtensions'
     ss.dependency 'ACEOAuth2RACManager/Private'
