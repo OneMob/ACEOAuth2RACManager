@@ -30,6 +30,8 @@
 
 #import <CocoaLumberjack/CocoaLumberjack.h>
 
+#define __DDLOG_ENABLED__ 1
+
 #undef LOG_LEVEL_DEF
 #define LOG_LEVEL_DEF ACELogLevel
 extern const DDLogLevel ACELogLevel;

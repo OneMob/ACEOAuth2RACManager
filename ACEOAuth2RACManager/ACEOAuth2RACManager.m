@@ -33,7 +33,7 @@
 
 NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
 
-#if _DDLOG_ENABLED
+#if __DDLOG_ENABLED__
     #if DEBUG
         const DDLogLevel ACELogLevel = DDLogLevelDebug;
     #else
