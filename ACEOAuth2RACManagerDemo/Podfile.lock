@@ -1,0 +1,60 @@
+PODS:
+  - ACEOAuth2RACManager/AFNetworkActivityLogger (1.0.9):
+    - ACEOAuth2RACManager/Private
+    - AFOAuth2Manager (~> 3.0)
+  - ACEOAuth2RACManager/AFNetworking-RACRetryExtensions (1.0.9):
+    - AFOAuth2Manager (~> 3.0)
+    - ReactiveCocoa (~> 2.5)
+  - ACEOAuth2RACManager/CocoaLumberjack (1.0.9):
+    - ACEOAuth2RACManager/Core
+    - CocoaLumberjack (~> 2.0)
+  - ACEOAuth2RACManager/Core (1.0.9):
+    - ACEOAuth2RACManager/AFNetworkActivityLogger
+    - ACEOAuth2RACManager/AFNetworking-RACRetryExtensions
+    - ACEOAuth2RACManager/Private
+    - NSURL+QueryDictionary (~> 1.2)
+  - ACEOAuth2RACManager/Private (1.0.9)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFOAuth2Manager (3.0.0):
+    - AFNetworking/NSURLSession (~> 3.0)
+  - CocoaLumberjack (2.4.0):
+    - CocoaLumberjack/Default (= 2.4.0)
+    - CocoaLumberjack/Extensions (= 2.4.0)
+  - CocoaLumberjack/Core (2.4.0)
+  - CocoaLumberjack/Default (2.4.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.4.0):
+    - CocoaLumberjack/Default
+  - NSURL+QueryDictionary (1.2.0)
+  - ReactiveCocoa (2.5):
+    - ReactiveCocoa/UI (= 2.5)
+  - ReactiveCocoa/Core (2.5):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.5)
+  - ReactiveCocoa/UI (2.5):
+    - ReactiveCocoa/Core
+
+DEPENDENCIES:
+  - ACEOAuth2RACManager/CocoaLumberjack (from `../`)
+
+EXTERNAL SOURCES:
+  ACEOAuth2RACManager:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ACEOAuth2RACManager: c275bb90b1710780c4a19b5f3de0f304f4910bba
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AFOAuth2Manager: 0566da1be64883e339813d411229fdc9a84dab7c
+  CocoaLumberjack: aa9dcab71bdf9eaf2a63bbd9ddc87863efe45457
+  NSURL+QueryDictionary: bae616404e2adf6409d3d5c02a093cbf44c8a236
+  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
+
+PODFILE CHECKSUM: 75d3fbf8abdf1b4a182fea103c9aca4119eeeb71
+
+COCOAPODS: 1.1.0.rc.2
