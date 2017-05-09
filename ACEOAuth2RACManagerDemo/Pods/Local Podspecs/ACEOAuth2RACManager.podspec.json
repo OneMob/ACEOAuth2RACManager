@@ -20,38 +20,21 @@
   "subspecs": [
     {
       "name": "Core",
-      "source_files": "ACEOAuth2RACManager/*.{h,m}",
+      "source_files": [
+        "ACEOAuth2RACManager/*.{h,m}",
+        "AFNetworkHelpers/AFNetworkActivityLogger/*.{h,m}",
+        "AFNetworkHelpers/AFNetworking-RACRetryExtensions/*.{h,m}"
+      ],
       "private_header_files": "ACEOAuth2RACManager/ACEOAuth2RACManagerPrivate.h",
-      "dependencies": {
-        "ACEOAuth2RACManager/AFNetworkActivityLogger": [
-
-        ],
-        "ACEOAuth2RACManager/AFNetworking-RACRetryExtensions": [
-
-        ],
-        "NSURL+QueryDictionary": [
-          "~> 1.2"
-        ]
-      }
-    },
-    {
-      "name": "AFNetworkActivityLogger",
-      "source_files": "AFNetworkHelpers/AFNetworkActivityLogger/*.{h,m}",
-      "dependencies": {
-        "AFOAuth2Manager": [
-          "~> 3.0"
-        ]
-      }
-    },
-    {
-      "name": "AFNetworking-RACRetryExtensions",
-      "source_files": "AFNetworkHelpers/AFNetworking-RACRetryExtensions/*.{h,m}",
       "dependencies": {
         "AFOAuth2Manager": [
           "~> 3.0"
         ],
         "ReactiveObjC": [
           "~> 3.0"
+        ],
+        "NSURL+QueryDictionary": [
+          "~> 1.2"
         ]
       }
     },

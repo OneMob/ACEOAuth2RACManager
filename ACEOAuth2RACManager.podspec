@@ -16,25 +16,12 @@ Pod::Spec.new do |s|
   # s.tvos.deployment_target = '9.0'
 
   s.subspec 'Core' do |ss|
-    ss.source_files  = 'ACEOAuth2RACManager/*.{h,m}'
+    ss.source_files  = 'ACEOAuth2RACManager/*.{h,m}', 'AFNetworkHelpers/AFNetworkActivityLogger/*.{h,m}', 'AFNetworkHelpers/AFNetworking-RACRetryExtensions/*.{h,m}'
     ss.private_header_files = 'ACEOAuth2RACManager/ACEOAuth2RACManagerPrivate.h'
-
-    ss.dependency 'ACEOAuth2RACManager/AFNetworkActivityLogger'
-    ss.dependency 'ACEOAuth2RACManager/AFNetworking-RACRetryExtensions'
-    ss.dependency 'NSURL+QueryDictionary', '~> 1.2'
-  end
-
-  s.subspec "AFNetworkActivityLogger" do |ss|
-    ss.source_files = 'AFNetworkHelpers/AFNetworkActivityLogger/*.{h,m}'
-
-    ss.dependency 'AFOAuth2Manager', '~> 3.0'
-  end
-
-  s.subspec "AFNetworking-RACRetryExtensions" do |ss|
-    ss.source_files = 'AFNetworkHelpers/AFNetworking-RACRetryExtensions/*.{h,m}'
 
     ss.dependency 'AFOAuth2Manager', '~> 3.0'
     ss.dependency "ReactiveObjC", "~> 3.0"
+    ss.dependency 'NSURL+QueryDictionary', '~> 1.2'
   end
 
   s.subspec "CocoaLumberjack" do |ss|
