@@ -20,10 +20,7 @@
   "subspecs": [
     {
       "name": "Core",
-      "source_files": [
-        "ACEOAuth2RACManager/*.{h,m}",
-        "ACEOAuth2RACManager/ACEOAuth2RACManagerPrivate.h"
-      ],
+      "source_files": "ACEOAuth2RACManager/*.{h,m}",
       "private_header_files": "ACEOAuth2RACManager/ACEOAuth2RACManagerPrivate.h",
       "dependencies": {
         "ACEOAuth2RACManager/AFNetworkActivityLogger": [
@@ -65,7 +62,7 @@
 
         ],
         "CocoaLumberjack": [
-          "~> 2.0"
+          "~> 3.0"
         ]
       }
     }

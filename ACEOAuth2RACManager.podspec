@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   # s.tvos.deployment_target = '9.0'
 
   s.subspec 'Core' do |ss|
-    ss.source_files  = 'ACEOAuth2RACManager/*.{h,m}', 'ACEOAuth2RACManager/ACEOAuth2RACManagerPrivate.h'
+    ss.source_files  = 'ACEOAuth2RACManager/*.{h,m}'
     ss.private_header_files = 'ACEOAuth2RACManager/ACEOAuth2RACManagerPrivate.h'
 
     ss.dependency 'ACEOAuth2RACManager/AFNetworkActivityLogger'
@@ -39,7 +39,7 @@ Pod::Spec.new do |s|
 
   s.subspec "CocoaLumberjack" do |ss|
     ss.dependency 'ACEOAuth2RACManager/Core'
-    ss.dependency 'CocoaLumberjack', '~> 2.0'
+    ss.dependency 'CocoaLumberjack', '~> 3.0'
   end
 
 end
