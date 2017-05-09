@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 
-#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <ReactiveObjC/ReactiveObjC.h>
 #import "ACEOAuth2RACCoordinators.h"
 
 extern NSTimeInterval const ACEDefaultRetryTimeInterval;

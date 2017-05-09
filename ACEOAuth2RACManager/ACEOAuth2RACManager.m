@@ -442,7 +442,7 @@ NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
 
 - (RACSignal *)rac_GET:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
 {
-    return [[self rac_authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
+    return [[self rac_authenticate] flattenMap:^__kindof RACSignal *(AFOAuthCredential *credential) {
         return [[self.networkManager rac_GET:path parameters:parameters retries:retries interval:interval test:self.oauthTestBlock]
                 map:^id(RACTuple *response) {
                     return [response first];
@@ -457,7 +457,7 @@ NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
 
 - (RACSignal *)rac_HEAD:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
 {
-    return [[self rac_authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
+    return [[self rac_authenticate] flattenMap:^__kindof RACSignal *(AFOAuthCredential *credential) {
         return [[self.networkManager rac_HEAD:path parameters:parameters retries:retries interval:interval test:self.oauthTestBlock]
                 map:^id(RACTuple *response) {
                     return [response first];
@@ -472,7 +472,7 @@ NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
 
 - (RACSignal *)rac_POST:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
 {
-    return [[self rac_authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
+    return [[self rac_authenticate] flattenMap:^__kindof RACSignal *(AFOAuthCredential *credential) {
         return [[self.networkManager rac_POST:path parameters:parameters retries:retries interval:interval test:self.oauthTestBlock]
                 map:^id(RACTuple *response) {
                     return [response first];
@@ -487,7 +487,7 @@ NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
 
 - (RACSignal *)rac_PUT:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
 {
-    return [[self rac_authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
+    return [[self rac_authenticate] flattenMap:^__kindof RACSignal *(AFOAuthCredential *credential) {
         return [[self.networkManager rac_PUT:path parameters:parameters retries:retries interval:interval test:self.oauthTestBlock]
                 map:^id(RACTuple *response) {
                     return [response first];
@@ -502,7 +502,7 @@ NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
 
 - (RACSignal *)rac_PATCH:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
 {
-    return [[self rac_authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
+    return [[self rac_authenticate] flattenMap:^__kindof RACSignal *(AFOAuthCredential *credential) {
         return [[self.networkManager rac_PATCH:path parameters:parameters retries:retries interval:interval test:self.oauthTestBlock]
                 map:^id(RACTuple *response) {
                     return [response first];
@@ -517,7 +517,7 @@ NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
 
 - (RACSignal *)rac_DELETE:(NSString *)path parameters:(id)parameters retries:(NSInteger)retries interval:(NSTimeInterval)interval
 {
-    return [[self rac_authenticate] flattenMap:^RACStream *(AFOAuthCredential *credential) {
+    return [[self rac_authenticate] flattenMap:^__kindof RACSignal *(AFOAuthCredential *credential) {
         return [[self.networkManager rac_DELETE:path parameters:parameters retries:retries interval:interval test:self.oauthTestBlock]
                 map:^id(RACTuple *response) {
                     return [response first];
