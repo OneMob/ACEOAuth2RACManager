@@ -15,6 +15,11 @@
 		50BB0D461C76CE9F00E7880F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50BB0D441C76CE9F00E7880F /* LaunchScreen.storyboard */; };
 		50BB0D511C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50BB0D501C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.m */; };
 		597A4935D8EF25176A06A379 /* libPods-ACEOAuth2RACManagerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A07FF35870F9EECFF112E02 /* libPods-ACEOAuth2RACManagerDemo.a */; };
+		80831D861EC27C8600DB78FF /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80831D851EC27C8600DB78FF /* NotificationCenter.framework */; };
+		80831D8A1EC27C8600DB78FF /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80831D891EC27C8600DB78FF /* TodayViewController.m */; };
+		80831D8D1EC27C8600DB78FF /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80831D8B1EC27C8600DB78FF /* MainInterface.storyboard */; };
+		80831D911EC27C8600DB78FF /* Today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 80831D841EC27C8600DB78FF /* Today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C7594EE32E10488DBC146CCD /* libPods-Today.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30315682AF44262FFC327099 /* libPods-Today.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,10 +30,33 @@
 			remoteGlobalIDString = 50BB0D321C76CE9F00E7880F;
 			remoteInfo = ACEOAuth2RACManagerDemo;
 		};
+		80831D8F1EC27C8600DB78FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 50BB0D2B1C76CE9F00E7880F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 80831D831EC27C8600DB78FF;
+			remoteInfo = Today;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		80831D951EC27C8700DB78FF /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				80831D911EC27C8600DB78FF /* Today.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		095583E29FB13437D01941AD /* Pods-ACEOAuth2RACManagerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEOAuth2RACManagerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACEOAuth2RACManagerDemo/Pods-ACEOAuth2RACManagerDemo.release.xcconfig"; sourceTree = "<group>"; };
+		2D94AE5EA279CFA1C81EB981 /* Pods-Today.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Today.release.xcconfig"; path = "Pods/Target Support Files/Pods-Today/Pods-Today.release.xcconfig"; sourceTree = "<group>"; };
+		30315682AF44262FFC327099 /* libPods-Today.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Today.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50BB0D331C76CE9F00E7880F /* ACEOAuth2RACManagerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACEOAuth2RACManagerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50BB0D371C76CE9F00E7880F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		50BB0D391C76CE9F00E7880F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -42,7 +70,14 @@
 		50BB0D4C1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACEOAuth2RACManagerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50BB0D501C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEOAuth2RACManagerDemoTests.m; sourceTree = "<group>"; };
 		50BB0D521C76CE9F00E7880F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80831D841EC27C8600DB78FF /* Today.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Today.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		80831D851EC27C8600DB78FF /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		80831D881EC27C8600DB78FF /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		80831D891EC27C8600DB78FF /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		80831D8C1EC27C8600DB78FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		80831D8E1EC27C8600DB78FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A07FF35870F9EECFF112E02 /* libPods-ACEOAuth2RACManagerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ACEOAuth2RACManagerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5B571DFD2421DCB3DEEE0E8 /* Pods-Today.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Today.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Today/Pods-Today.debug.xcconfig"; sourceTree = "<group>"; };
 		D6B8160668DE29852F9273EF /* Pods-ACEOAuth2RACManagerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACEOAuth2RACManagerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ACEOAuth2RACManagerDemo/Pods-ACEOAuth2RACManagerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,6 +97,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		80831D811EC27C8600DB78FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80831D861EC27C8600DB78FF /* NotificationCenter.framework in Frameworks */,
+				C7594EE32E10488DBC146CCD /* libPods-Today.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -69,6 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				8A07FF35870F9EECFF112E02 /* libPods-ACEOAuth2RACManagerDemo.a */,
+				80831D851EC27C8600DB78FF /* NotificationCenter.framework */,
+				30315682AF44262FFC327099 /* libPods-Today.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -78,6 +124,7 @@
 			children = (
 				50BB0D351C76CE9F00E7880F /* ACEOAuth2RACManagerDemo */,
 				50BB0D4F1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests */,
+				80831D871EC27C8600DB78FF /* Today */,
 				50BB0D341C76CE9F00E7880F /* Products */,
 				D33DEE3CD2F9C2BEAC0FEA1F /* Pods */,
 				49588A55B6D7E0978C0192C7 /* Frameworks */,
@@ -89,6 +136,7 @@
 			children = (
 				50BB0D331C76CE9F00E7880F /* ACEOAuth2RACManagerDemo.app */,
 				50BB0D4C1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.xctest */,
+				80831D841EC27C8600DB78FF /* Today.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,11 +174,24 @@
 			path = ACEOAuth2RACManagerDemoTests;
 			sourceTree = "<group>";
 		};
+		80831D871EC27C8600DB78FF /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				80831D881EC27C8600DB78FF /* TodayViewController.h */,
+				80831D891EC27C8600DB78FF /* TodayViewController.m */,
+				80831D8B1EC27C8600DB78FF /* MainInterface.storyboard */,
+				80831D8E1EC27C8600DB78FF /* Info.plist */,
+			);
+			path = Today;
+			sourceTree = "<group>";
+		};
 		D33DEE3CD2F9C2BEAC0FEA1F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				D6B8160668DE29852F9273EF /* Pods-ACEOAuth2RACManagerDemo.debug.xcconfig */,
 				095583E29FB13437D01941AD /* Pods-ACEOAuth2RACManagerDemo.release.xcconfig */,
+				D5B571DFD2421DCB3DEEE0E8 /* Pods-Today.debug.xcconfig */,
+				2D94AE5EA279CFA1C81EB981 /* Pods-Today.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -148,10 +209,12 @@
 				50BB0D311C76CE9F00E7880F /* Resources */,
 				23F0D2BB417BDC60F9259DC6 /* [CP] Embed Pods Frameworks */,
 				93473C4BAC4FC3D59E2554BF /* [CP] Copy Pods Resources */,
+				80831D951EC27C8700DB78FF /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				80831D901EC27C8600DB78FF /* PBXTargetDependency */,
 			);
 			name = ACEOAuth2RACManagerDemo;
 			productName = ACEOAuth2RACManagerDemo;
@@ -176,13 +239,32 @@
 			productReference = 50BB0D4C1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		80831D831EC27C8600DB78FF /* Today */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80831D941EC27C8700DB78FF /* Build configuration list for PBXNativeTarget "Today" */;
+			buildPhases = (
+				6378FC980455ABF00ABBF335 /* [CP] Check Pods Manifest.lock */,
+				80831D801EC27C8600DB78FF /* Sources */,
+				80831D811EC27C8600DB78FF /* Frameworks */,
+				80831D821EC27C8600DB78FF /* Resources */,
+				3C7DA6F21AE145DEB9061D14 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Today;
+			productName = Today;
+			productReference = 80831D841EC27C8600DB78FF /* Today.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		50BB0D2B1C76CE9F00E7880F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Stefano Acerbetti";
 				TargetAttributes = {
 					50BB0D321C76CE9F00E7880F = {
@@ -191,6 +273,10 @@
 					50BB0D4B1C76CE9F00E7880F = {
 						CreatedOnToolsVersion = 7.2.1;
 						TestTargetID = 50BB0D321C76CE9F00E7880F;
+					};
+					80831D831EC27C8600DB78FF = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -209,6 +295,7 @@
 			targets = (
 				50BB0D321C76CE9F00E7880F /* ACEOAuth2RACManagerDemo */,
 				50BB0D4B1C76CE9F00E7880F /* ACEOAuth2RACManagerDemoTests */,
+				80831D831EC27C8600DB78FF /* Today */,
 			);
 		};
 /* End PBXProject section */
@@ -228,6 +315,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80831D821EC27C8600DB78FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80831D8D1EC27C8600DB78FF /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +357,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ACEOAuth2RACManagerDemo/Pods-ACEOAuth2RACManagerDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3C7DA6F21AE145DEB9061D14 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Today/Pods-Today-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6378FC980455ABF00ABBF335 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		93473C4BAC4FC3D59E2554BF /* [CP] Copy Pods Resources */ = {
@@ -300,6 +425,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		80831D801EC27C8600DB78FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80831D8A1EC27C8600DB78FF /* TodayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -307,6 +440,11 @@
 			isa = PBXTargetDependency;
 			target = 50BB0D321C76CE9F00E7880F /* ACEOAuth2RACManagerDemo */;
 			targetProxy = 50BB0D4D1C76CE9F00E7880F /* PBXContainerItemProxy */;
+		};
+		80831D901EC27C8600DB78FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 80831D831EC27C8600DB78FF /* Today */;
+			targetProxy = 80831D8F1EC27C8600DB78FF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -327,6 +465,14 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		80831D8B1EC27C8600DB78FF /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				80831D8C1EC27C8600DB78FF /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -343,8 +489,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -386,8 +534,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -460,6 +610,40 @@
 			};
 			name = Release;
 		};
+		80831D921EC27C8700DB78FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5B571DFD2421DCB3DEEE0E8 /* Pods-Today.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				INFOPLIST_FILE = Today/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.acerbetti.ACEOAuth2RACManagerDemo.Today;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		80831D931EC27C8700DB78FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D94AE5EA279CFA1C81EB981 /* Pods-Today.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				INFOPLIST_FILE = Today/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.acerbetti.ACEOAuth2RACManagerDemo.Today;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -486,6 +670,15 @@
 			buildConfigurations = (
 				50BB0D591C76CE9F00E7880F /* Debug */,
 				50BB0D5A1C76CE9F00E7880F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		80831D941EC27C8700DB78FF /* Build configuration list for PBXNativeTarget "Today" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80831D921EC27C8700DB78FF /* Debug */,
+				80831D931EC27C8700DB78FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

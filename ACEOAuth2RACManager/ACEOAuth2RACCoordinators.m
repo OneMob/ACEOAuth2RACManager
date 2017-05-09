@@ -35,15 +35,15 @@
     return @"Browser";
 }
 
-- (void)oauthManagerWillBeginAuthentication:(ACEOAuth2RACManager *)manager withURL:(NSURL *)oauthURL
+- (void)oauthManagerWillBeginAuthentication:(ACEOAuth2RACManager *)manager withURL:(NSURL *)oauthURL NS_EXTENSION_UNAVAILABLE_IOS("ACEOAuth2RACBrowserCoordinator is not supported in iOS extension.")
 {
     // open the page in an external browser
 #if TARGET_OS_IPHONE
     [[UIApplication sharedApplication] openURL:oauthURL];
+    
 #else
     [[NSWorkspace sharedWorkspace] openURL:oauthURL];
 #endif
-
 }
 
 @end

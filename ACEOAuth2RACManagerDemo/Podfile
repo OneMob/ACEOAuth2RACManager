@@ -1,3 +1,7 @@
 target 'ACEOAuth2RACManagerDemo' do
     pod 'ACEOAuth2RACManager/CocoaLumberjack', :path => '../'
 end
+
+target 'Today' do
+    pod 'ACEOAuth2RACManager/CocoaLumberjack', :path => '../'
+end
