@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name     = 'ACEOAuth2RACManager'
-  s.version  = '1.1.1'
+  s.version  = '1.1.2'
   s.license  = 'MIT'
   s.summary  = 'Network manager with RAC OAuth2 support.'
   s.homepage = 'https://github.com/acerbetti/ACEOAuth2RACManager'
