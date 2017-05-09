@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name     = 'ACEOAuth2RACManager'
-  s.version  = '1.1.0'
+  s.version  = '1.1.1'
   s.license  = 'MIT'
   s.summary  = 'Network manager with RAC OAuth2 support.'
   s.homepage = 'https://github.com/acerbetti/ACEOAuth2RACManager'
@@ -16,12 +16,25 @@ Pod::Spec.new do |s|
   # s.tvos.deployment_target = '9.0'
 
   s.subspec 'Core' do |ss|
-    ss.source_files  = 'ACEOAuth2RACManager/*.{h,m}', 'AFNetworkHelpers/AFNetworkActivityLogger/*.{h,m}', 'AFNetworkHelpers/AFNetworking-RACRetryExtensions/*.{h,m}'
+    ss.source_files  = 'ACEOAuth2RACManager/*.{h,m}'
     ss.private_header_files = 'ACEOAuth2RACManager/ACEOAuth2RACManagerPrivate.h'
 
+    ss.dependency 'NSURL+QueryDictionary', '~> 1.2'
+  end
+
+  s.subspec "AFNetworkActivityLogger" do |ss|
+    ss.source_files = 'AFNetworkHelpers/AFNetworkActivityLogger/*.{h,m}'
+
+    ss.dependency 'ACEOAuth2RACManager/Core'
+    ss.dependency 'AFOAuth2Manager', '~> 3.0'
+  end
+
+  s.subspec "AFNetworking-RACRetryExtensions" do |ss|
+    ss.source_files = 'AFNetworkHelpers/AFNetworking-RACRetryExtensions/*.{h,m}'
+
+    ss.dependency 'ACEOAuth2RACManager/Core'
     ss.dependency 'AFOAuth2Manager', '~> 3.0'
     ss.dependency "ReactiveObjC", "~> 3.0"
-    ss.dependency 'NSURL+QueryDictionary', '~> 1.2'
   end
 
   s.subspec "CocoaLumberjack" do |ss|

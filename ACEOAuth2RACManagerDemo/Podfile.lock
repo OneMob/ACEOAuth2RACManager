@@ -1,11 +1,16 @@
 PODS:
-  - ACEOAuth2RACManager/CocoaLumberjack (1.1.0):
+  - ACEOAuth2RACManager/AFNetworkActivityLogger (1.1.1):
+    - ACEOAuth2RACManager/Core
+    - AFOAuth2Manager (~> 3.0)
+  - ACEOAuth2RACManager/AFNetworking-RACRetryExtensions (1.1.1):
+    - ACEOAuth2RACManager/Core
+    - AFOAuth2Manager (~> 3.0)
+    - ReactiveObjC (~> 3.0)
+  - ACEOAuth2RACManager/CocoaLumberjack (1.1.1):
     - ACEOAuth2RACManager/Core
     - CocoaLumberjack (~> 3.0)
-  - ACEOAuth2RACManager/Core (1.1.0):
-    - AFOAuth2Manager (~> 3.0)
+  - ACEOAuth2RACManager/Core (1.1.1):
     - NSURL+QueryDictionary (~> 1.2)
-    - ReactiveObjC (~> 3.0)
   - AFNetworking/NSURLSession (3.1.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
@@ -25,6 +30,8 @@ PODS:
   - ReactiveObjC (3.0.0)
 
 DEPENDENCIES:
+  - ACEOAuth2RACManager/AFNetworkActivityLogger (from `../`)
+  - ACEOAuth2RACManager/AFNetworking-RACRetryExtensions (from `../`)
   - ACEOAuth2RACManager/CocoaLumberjack (from `../`)
 
 EXTERNAL SOURCES:
@@ -32,13 +39,13 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ACEOAuth2RACManager: b77252ab5195335ff1ceee0e6acee2de94f9c134
+  ACEOAuth2RACManager: a38bf38afa0fd5014faf8364815db89bacd911d3
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   AFOAuth2Manager: 0566da1be64883e339813d411229fdc9a84dab7c
   CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
   NSURL+QueryDictionary: bae616404e2adf6409d3d5c02a093cbf44c8a236
   ReactiveObjC: ce79989e8684b9086b5f8d0c74bc7b81a8729c9e
 
-PODFILE CHECKSUM: d74d45cdc610c4644f014a85e3407a14c4847781
+PODFILE CHECKSUM: 416bc7063f58c9d72ecbd51bc6355a19af75ac2d
 
 COCOAPODS: 1.2.0

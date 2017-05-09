@@ -29,7 +29,8 @@
 #import "AFHTTPSessionManager+RACRetrySupport.h"
 #import "AFNetworkActivityLogger.h"
 #import "AFOAuth2Manager.h"
-#import <NSURL+QueryDictionary/NSURL+QueryDictionary.h>
+
+#import "NSURL+QueryDictionary.h"
 
 NSTimeInterval const ACEDefaultRetryTimeInterval = 5.0;
 

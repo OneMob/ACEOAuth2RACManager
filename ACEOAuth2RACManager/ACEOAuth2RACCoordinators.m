@@ -24,7 +24,7 @@
 #import "ACEOAuth2RACCoordinators.h"
 #import "ACEOAuth2RACManager.h"
 
-#import <NSURL+QueryDictionary/NSURL+QueryDictionary.h>
+#import "NSURL+QueryDictionary.h"
 
 #if !OAUTH_APP_EXTENSION
 
